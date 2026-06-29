@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profils Narratifs — Опросник о себе</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1a2e;--ink-soft:#4a4a6a;--ink-faint:#8888a8;
+  --cream:#f8f6f0;--cream-d:#ede8df;
+  --navy:#1e3a5f;--teal:#2d4a3e;--teal-s:#d4e8e0;
+  --white:#ffffff;--r:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+
+.header{background:var(--navy);padding:20px 24px;display:flex;align-items:center;gap:16px}
+.header-brand{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.header-title{font-size:16px;font-weight:600;color:#fff;margin-top:2px}
+
+.container{max-width:680px;margin:0 auto;padding:32px 20px}
+
+.progress-wrap{margin-bottom:32px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);margin-bottom:8px}
+.progress-bar{height:4px;background:var(--cream-d);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .4s ease}
+
+.step{display:none}
+.step.active{display:block}
+
+.step-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.step-title{font-size:24px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.step-desc{font-size:14px;color:var(--ink-faint);margin-bottom:28px;line-height:1.6}
+
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1.5px solid var(--cream-d);border-radius:8px;font-size:15px;color:var(--ink);font-family:inherit;outline:none;transition:border-color .2s;background:var(--white)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal)}
+.field textarea{resize:vertical;min-height:100px;line-height:1.6}
+.field-hint{font-size:12px;color:var(--ink-faint);margin-top:6px;line-height:1.5}
+
+.fields-group{background:var(--white);border-radius:var(--r);padding:20px;margin-bottom:16px;border:1.5px solid var(--cream-d)}
+.fields-group-title{font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:16px}
+
+/* AB TYPOLOGY */
+.ab-question{background:var(--white);border-radius:var(--r);padding:20px;margin-bottom:16px;border:1.5px solid var(--cream-d)}
+.ab-question-text{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.5}
+.ab-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ab-option{border:1.5px solid var(--cream-d);border-radius:8px;padding:14px 16px;cursor:pointer;transition:all .2s;background:var(--white)}
+.ab-option:hover{border-color:var(--teal);background:var(--teal-s)}
+.ab-option.selected{border-color:var(--teal);background:var(--teal-s)}
+.ab-option-letter{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--ink-faint);margin-bottom:4px}
+.ab-option-text{font-size:14px;color:var(--ink);line-height:1.4}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:none;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{opacity:.88}
+.btn-ghost{background:transparent;border:1.5px solid var(--cream-d);color:var(--ink-soft)}.btn-ghost:hover{border-color:var(--ink-soft);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* WELCOME & THANKS */
+.welcome{text-align:center;padding:48px 20px}
+.welcome-icon{font-size:48px;margin-bottom:20px}
+.welcome-title{font-size:28px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.welcome-text{font-size:15px;color:var(--ink-soft);line-height:1.7;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+.welcome-name{font-size:18px;font-weight:600;color:var(--teal);margin-bottom:8px}
+
+.error-box{background:#fee2e2;border:1.5px solid #fca5a5;border-radius:8px;padding:16px;text-align:center;color:#991b1b;font-size:14px}
+
+.spinner{width:32px;height:32px;border:3px solid var(--cream-d);border-top-color:var(--teal);border-radius:50%;animation:spin 1s linear infinite;margin:48px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-brand">Association de l'Intelligence Narrative</div>
+    <div class="header-title">Profils Narratifs — Опросник о себе</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- LOADING -->
+  <div id="screen-loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ERROR -->
+  <div id="screen-error" style="display:none">
+    <div class="error-box" id="error-message">Ссылка недействительна или истекла.</div>
+  </div>
+
+  <!-- FORM -->
+  <div id="screen-form" style="display:none">
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="step-label-text">Шаг 1 из 6</span>
+        <span id="step-pct-text">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <!-- STEP 0: Данные участника -->
+    <div class="step active" id="step-0">
+      <div class="step-label">Добро пожаловать</div>
+      <div class="step-title" id="welcome-name-title">Рады вас видеть!</div>
+      <div class="step-desc">Прежде чем начать, подтвердите ваши данные. Это займёт 1 минуту.</div>
+      <div class="field"><label>Имя и фамилия *</label><input type="text" id="p-name" placeholder="Иван Иванов"></div>
+      <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>Компания</label><input type="text" id="p-company"></div>
+        <div class="field"><label>Должность</label><input type="text" id="p-position"></div>
+      </div>
+      <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>Страна</label><input type="text" id="p-country"></div>
+        <div class="field"><label>Сфера деятельности</label><input type="text" id="p-industry"></div>
+      </div>
+      <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>Возраст</label>
+          <select id="p-age"><option value="">— выберите —</option><option>до 35</option><option>35–45</option><option>45–55</option><option>55+</option></select>
+        </div>
+        <div class="field"><label>Пол</label>
+          <select id="p-gender"><option value="">— выберите —</option><option value="Мужской">Мужской</option><option value="Женский">Женский</option><option value="Другой">Другой</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Образование</label>
+        <select id="p-education"><option value="">— выберите —</option><option>Среднее</option><option>Бакалавр</option><option>Магистр</option><option>PhD</option><option>MBA</option><option>Другое</option></select>
+      </div>
+    </div>
+
+    <!-- STEP 1: Результаты и препятствия -->
+    <div class="step" id="step-1">
+      <div class="step-label">Блок 1</div>
+      <div class="step-title">Результаты и препятствия</div>
+      <div class="step-desc">Пишите первое, что приходит в голову — именно это будет самым ценным.</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Четыре результата, которых Вы хотите достичь в самое ближайшее время:</div>
+        <div class="field"><label>1.</label><input type="text" id="result_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="result_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="result_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="result_4"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Что мешает вам в вашем окружении достичь этих результатов?</div>
+        <div class="field"><label>1.</label><input type="text" id="obstacle_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="obstacle_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="obstacle_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="obstacle_4"></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Навыки и преимущества -->
+    <div class="step" id="step-2">
+      <div class="step-label">Блок 2</div>
+      <div class="step-title">Навыки и преимущества</div>
+      <div class="step-desc">Отвечайте честно — здесь нет правильных ответов.</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Каких навыков или знаний вам не хватает, чтобы достичь этих результатов?</div>
+        <div class="field"><label>1.</label><input type="text" id="skill_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="skill_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="skill_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="skill_4"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Каковы ваши личные и профессиональные преимущества? Чем вы отличаетесь от других? Вспомните момент, когда коллега или близкий человек сказал о вас что-то, что вас удивило или тронуло.</div>
+        <div class="field"><label>1.</label><input type="text" id="strength_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="strength_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="strength_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="strength_4"></div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Ценности и ощущение -->
+    <div class="step" id="step-3">
+      <div class="step-label">Блок 3</div>
+      <div class="step-title">Ценности и ощущение</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Что для вас действительно важно и ценно в этом мире?</div>
+        <div class="field"><label>1.</label><input type="text" id="value_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="value_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="value_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="value_4"></div>
+      </div>
+
+      <div class="field">
+        <label>Опишите одним-двумя предложениями, как вы сейчас себя чувствуете в компании — не анализ, а ощущение.</label>
+        <textarea id="feeling_now" placeholder="Например: чувствую усталость но вижу потенциал..."></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 4: Быстрые вопросы -->
+    <div class="step" id="step-4">
+      <div class="step-label">Блок 4</div>
+      <div class="step-title">Быстрые вопросы</div>
+      <div class="step-desc">Отвечайте максимально быстро — первое, что приходит в голову.</div>
+
+      <div class="field">
+        <label>Что отнимает у вас время, не принося никакой пользы?</label>
+        <textarea id="time_waste"></textarea>
+      </div>
+      <div class="field">
+        <label>Чем, по вашим наблюдениям, выдающиеся в своём деле люди отличаются от остальных?</label>
+        <textarea id="outstanding_people"></textarea>
+      </div>
+      <div class="field">
+        <label>Самый лучший совет, который вам когда-либо давали, и почему вы считаете его таковым.</label>
+        <textarea id="best_advice"></textarea>
+      </div>
+      <div class="field">
+        <label>Каким вы видите наше сотрудничество? Чего вы ожидаете от наших сессий?</label>
+        <textarea id="expectations"></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 5: Типология A/B -->
+    <div class="step" id="step-5">
+      <div class="step-label">Блок 5</div>
+      <div class="step-title">Несколько вопросов о вас</div>
+      <div class="step-desc">Подчеркните ответ, который больше вам подходит.</div>
+
+      <div class="ab-question">
+        <div class="ab-question-text">1. Как вы обычно восстанавливаете силы после тяжёлого дня?</div>
+        <div class="ab-options">
+          <div class="ab-option" onclick="selectAB('ab_q1','A',this)">
+            <div class="ab-option-letter">A</div>
+            <div class="ab-option-text">В компании друзей, на вечеринке или в чате.</div>
+          </div>
+          <div class="ab-option" onclick="selectAB('ab_q1','B',this)">
+            <div class="ab-option-letter">B</div>
+            <div class="ab-option-text">В одиночестве, за книгой, фильмом или прогулкой.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ab-question">
+        <div class="ab-question-text">2. Как вы принимаете решения?</div>
+        <div class="ab-options">
+          <div class="ab-option" onclick="selectAB('ab_q2','A',this)">
+            <div class="ab-option-letter">A</div>
+            <div class="ab-option-text">Руководствуюсь логикой, фактами и объективными данными.</div>
+          </div>
+          <div class="ab-option" onclick="selectAB('ab_q2','B',this)">
+            <div class="ab-option-letter">B</div>
+            <div class="ab-option-text">Ориентируюсь на чувства, ценности и эмоции — свои и других.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ab-question">
+        <div class="ab-question-text">3. Как вы относитесь к планированию?</div>
+        <div class="ab-options">
+          <div class="ab-option" onclick="selectAB('ab_q3','A',this)">
+            <div class="ab-option-letter">A</div>
+            <div class="ab-option-text">Люблю, когда всё расписано заранее и чётко организовано.</div>
+          </div>
+          <div class="ab-option" onclick="selectAB('ab_q3','B',this)">
+            <div class="ab-option-letter">B</div>
+            <div class="ab-option-text">Предпочитаю гибкость и спонтанность, часто действую по ситуации.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ab-question">
+        <div class="ab-question-text">4. В компании новых людей вы скорее:</div>
+        <div class="ab-options">
+          <div class="ab-option" onclick="selectAB('ab_q4','A',this)">
+            <div class="ab-option-letter">A</div>
+            <div class="ab-option-text">Быстро завожу разговор, знакомлюсь со всеми.</div>
+          </div>
+          <div class="ab-option" onclick="selectAB('ab_q4','B',this)">
+            <div class="ab-option-letter">B</div>
+            <div class="ab-option-text">Сначала наблюдаю, присматриваюсь, говорю меньше.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ab-question">
+        <div class="ab-question-text">5. Если работа или проект затянулся, вы:</div>
+        <div class="ab-options">
+          <div class="ab-option" onclick="selectAB('ab_q5','A',this)">
+            <div class="ab-option-letter">A</div>
+            <div class="ab-option-text">Довожу до конца любой ценой, даже если устал.</div>
+          </div>
+          <div class="ab-option" onclick="selectAB('ab_q5','B',this)">
+            <div class="ab-option-letter">B</div>
+            <div class="ab-option-text">Могу переключиться на что-то другое, чтобы не выгореть.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ab-question">
+        <div class="ab-question-text">6. Что для вас важнее в общении?</div>
+        <div class="ab-options">
+          <div class="ab-option" onclick="selectAB('ab_q6','A',this)">
+            <div class="ab-option-letter">A</div>
+            <div class="ab-option-text">Содержание и смысл сказанного.</div>
+          </div>
+          <div class="ab-option" onclick="selectAB('ab_q6','B',this)">
+            <div class="ab-option-letter">B</div>
+            <div class="ab-option-text">Атмосфера, настроение, эмоциональная связь.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-ghost" id="btn-back" onclick="prevStep()" style="display:none">← Назад</button>
+      <button class="btn btn-teal" id="btn-next" onclick="nextStep()">Далее →</button>
+    </div>
+
+  </div>
+
+  <!-- THANKS -->
+  <div id="screen-thanks" style="display:none">
+    <div class="welcome">
+      <div class="welcome-icon">✦</div>
+      <div class="welcome-title">Спасибо за искренность</div>
+      <div class="welcome-text">Ваши ответы получены. Они помогут сделать нашу работу вместе максимально точной.<br><br>До встречи.</div>
+      <div style="font-size:13px;color:var(--ink-faint);font-style:italic">Association de l'Intelligence Narrative · А. Аветисов</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = 'https://adin-ni-backend-production.up.railway.app/api';
+const TOTAL_STEPS = 6; // 0..5
+let currentStep = 0;
+let token = null;
+let participantData = null;
+let abAnswers = {};
+
+// Get token from URL
+const urlParams = new URLSearchParams(window.location.search);
+token = urlParams.get('token');
+
+window.onload = async () => {
+  if (!token) { showError('Ссылка недействительна — токен не найден.'); return; }
+  await loadParticipant();
+};
+
+async function loadParticipant() {
+  try {
+    const r = await fetch(API + '/v2/invitation/' + token);
+    const d = await r.json();
+    if (!r.ok || d.error) { showError(d.error || 'Ссылка недействительна.'); return; }
+    participantData = d;
+    prefillForm(d);
+    showScreen('form');
+    updateProgress();
+  } catch(e) {
+    showError('Ошибка соединения с сервером.');
+  }
+}
+
+function prefillForm(p) {
+  if (p.name) document.getElementById('p-name').value = p.name;
+  if (p.company) document.getElementById('p-company').value = p.company;
+  if (p.position) document.getElementById('p-position').value = p.position;
+  if (p.country) document.getElementById('p-country').value = p.country;
+  if (p.industry) document.getElementById('p-industry').value = p.industry;
+  if (p.age_range) document.getElementById('p-age').value = p.age_range;
+  if (p.gender) document.getElementById('p-gender').value = p.gender;
+  if (p.education) document.getElementById('p-education').value = p.education;
+  if (p.name) {
+    document.getElementById('welcome-name-title').textContent = 'Здравствуйте, ' + p.name.split(' ')[0] + '!';
+  }
+}
+
+function showScreen(name) {
+  ['loading','error','form','thanks'].forEach(s => {
+    document.getElementById('screen-' + s).style.display = s === name ? 'block' : 'none';
+  });
+}
+
+function showError(msg) {
+  document.getElementById('error-message').textContent = msg;
+  showScreen('error');
+}
+
+function updateProgress() {
+  const pct = Math.round((currentStep / TOTAL_STEPS) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('step-label-text').textContent = 'Шаг ' + (currentStep + 1) + ' из ' + TOTAL_STEPS;
+  document.getElementById('step-pct-text').textContent = pct + '%';
+  document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
+  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS - 1 ? 'Отправить ✓' : 'Далее →';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  currentStep = n;
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+function nextStep() {
+  if (currentStep === 0) {
+    const name = document.getElementById('p-name').value.trim();
+    if (!name) { alert('Пожалуйста, введите ваше имя.'); return; }
+  }
+  if (currentStep === TOTAL_STEPS - 1) {
+    submitForm(); return;
+  }
+  showStep(currentStep + 1);
+}
+
+function prevStep() {
+  if (currentStep > 0) showStep(currentStep - 1);
+}
+
+function selectAB(field, value, el) {
+  abAnswers[field] = value;
+  const parent = el.closest('.ab-question');
+  parent.querySelectorAll('.ab-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? (el.value || null) : null;
+}
+
+async function submitForm() {
+  const answers = {
+    result_1: getVal('result_1'), result_2: getVal('result_2'),
+    result_3: getVal('result_3'), result_4: getVal('result_4'),
+    obstacle_1: getVal('obstacle_1'), obstacle_2: getVal('obstacle_2'),
+    obstacle_3: getVal('obstacle_3'), obstacle_4: getVal('obstacle_4'),
+    skill_1: getVal('skill_1'), skill_2: getVal('skill_2'),
+    skill_3: getVal('skill_3'), skill_4: getVal('skill_4'),
+    strength_1: getVal('strength_1'), strength_2: getVal('strength_2'),
+    strength_3: getVal('strength_3'), strength_4: getVal('strength_4'),
+    value_1: getVal('value_1'), value_2: getVal('value_2'),
+    value_3: getVal('value_3'), value_4: getVal('value_4'),
+    feeling_now: getVal('feeling_now'),
+    time_waste: getVal('time_waste'),
+    outstanding_people: getVal('outstanding_people'),
+    best_advice: getVal('best_advice'),
+    expectations: getVal('expectations'),
+    ...abAnswers
+  };
+
+  const respondent = {
+    name: getVal('p-name'), company: getVal('p-company'),
+    position: getVal('p-position'), country: getVal('p-country'),
+    industry: getVal('p-industry'), age_range: getVal('p-age'),
+    gender: getVal('p-gender'), education: getVal('p-education')
+  };
+
+  document.getElementById('btn-next').disabled = true;
+  document.getElementById('btn-next').textContent = 'Отправляем...';
+
+  try {
+    const r = await fetch(API + '/v2/submit/questionnaire', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ token, answers, respondent })
+    });
+    const d = await r.json();
+    if (r.ok && d.success) {
+      showScreen('thanks');
+    } else {
+      alert('Ошибка отправки: ' + (d.error || 'попробуйте снова'));
+      document.getElementById('btn-next').disabled = false;
+      document.getElementById('btn-next').textContent = 'Отправить ✓';
+    }
+  } catch(e) {
+    alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+    document.getElementById('btn-next').disabled = false;
+    document.getElementById('btn-next').textContent = 'Отправить ✓';
+  }
+}
+</script>
+</body>
+</html>

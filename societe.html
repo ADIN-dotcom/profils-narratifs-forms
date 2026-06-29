@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profils Narratifs — Опросник о компании</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1a2e;--ink-soft:#4a4a6a;--ink-faint:#8888a8;
+  --cream:#f8f6f0;--cream-d:#ede8df;
+  --navy:#1e3a5f;--teal:#2d4a3e;--teal-s:#d4e8e0;
+  --white:#ffffff;--r:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+.header{background:var(--navy);padding:20px 24px}
+.header-brand{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.header-title{font-size:16px;font-weight:600;color:#fff;margin-top:2px}
+.container{max-width:680px;margin:0 auto;padding:32px 20px}
+.progress-wrap{margin-bottom:32px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);margin-bottom:8px}
+.progress-bar{height:4px;background:var(--cream-d);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .4s ease}
+.step{display:none}.step.active{display:block}
+.step-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.step-title{font-size:24px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.step-desc{font-size:14px;color:var(--ink-faint);margin-bottom:28px;line-height:1.6}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1.5px solid var(--cream-d);border-radius:8px;font-size:15px;color:var(--ink);font-family:inherit;outline:none;transition:border-color .2s;background:var(--white)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal)}
+.field textarea{resize:vertical;min-height:100px;line-height:1.6}
+.fields-group{background:var(--white);border-radius:var(--r);padding:20px;margin-bottom:16px;border:1.5px solid var(--cream-d)}
+.fields-group-title{font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:16px;line-height:1.5}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:none;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{opacity:.88}
+.btn-ghost{background:transparent;border:1.5px solid var(--cream-d);color:var(--ink-soft)}.btn-ghost:hover{border-color:var(--ink-soft);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.error-box{background:#fee2e2;border:1.5px solid #fca5a5;border-radius:8px;padding:16px;text-align:center;color:#991b1b;font-size:14px}
+.spinner{width:32px;height:32px;border:3px solid var(--cream-d);border-top-color:var(--teal);border-radius:50%;animation:spin 1s linear infinite;margin:48px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.welcome{text-align:center;padding:48px 20px}
+.welcome-icon{font-size:48px;margin-bottom:20px}
+.welcome-title{font-size:28px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.welcome-text{font-size:15px;color:var(--ink-soft);line-height:1.7;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-brand">Association de l'Intelligence Narrative</div>
+  <div class="header-title">Profils Narratifs — Опросник о компании</div>
+</div>
+
+<div class="container">
+
+  <div id="screen-loading"><div class="spinner"></div></div>
+
+  <div id="screen-error" style="display:none">
+    <div class="error-box" id="error-message">Ссылка недействительна или истекла.</div>
+  </div>
+
+  <div id="screen-form" style="display:none">
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="step-label-text">Шаг 1 из 5</span>
+        <span id="step-pct-text">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <!-- STEP 0: Компания мечты -->
+    <div class="step active" id="step-0">
+      <div class="step-label">Блок 1</div>
+      <div class="step-title">Компания мечты</div>
+      <div class="step-desc">Представьте идеальную компанию — такую, в которой вы работаете с полной отдачей.</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Четыре слова или выражения, которые характеризуют вашу компанию-мечту:</div>
+        <div class="field"><label>1.</label><input type="text" id="dream_word_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="dream_word_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="dream_word_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="dream_word_4"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Три компании (не обязательно в вашей отрасли), которые кажутся вам образцовыми, и почему:</div>
+        <div class="field"><label>1.</label><input type="text" id="benchmark_1" placeholder="Название компании и причина"></div>
+        <div class="field"><label>2.</label><input type="text" id="benchmark_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="benchmark_3"></div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Коллеги и условия -->
+    <div class="step" id="step-1">
+      <div class="step-label">Блок 2</div>
+      <div class="step-title">Коллеги и условия работы</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Четыре качества, которыми должны обладать ваши идеальные коллеги:</div>
+        <div class="field"><label>1.</label><input type="text" id="colleague_q_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="colleague_q_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="colleague_q_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="colleague_q_4"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Три условия, необходимые для того, чтобы вы работали в полную силу:</div>
+        <div class="field"><label>1.</label><input type="text" id="condition_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="condition_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="condition_3"></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Управление -->
+    <div class="step" id="step-2">
+      <div class="step-label">Блок 3</div>
+      <div class="step-title">Стиль управления</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Три характеристики идеального стиля управления для вас лично:</div>
+        <div class="field"><label>1.</label><input type="text" id="mgmt_style_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="mgmt_style_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="mgmt_style_3"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Если бы вы были руководителем — четыре качества, которые вы бы хотели развивать в себе:</div>
+        <div class="field"><label>1.</label><input type="text" id="leader_q_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="leader_q_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="leader_q_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="leader_q_4"></div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Роли и решения -->
+    <div class="step" id="step-3">
+      <div class="step-label">Блок 4</div>
+      <div class="step-title">Роли и принятие решений</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Три роли, которые должен в первую очередь выполнять генеральный директор вашей компании:</div>
+        <div class="field"><label>1.</label><input type="text" id="ceo_role_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="ceo_role_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="ceo_role_3"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Четыре слова или выражения, которые характеризуют вашу нынешнюю компанию:</div>
+        <div class="field"><label>1.</label><input type="text" id="now_word_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="now_word_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="now_word_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="now_word_4"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Три решения, принятые в вашей компании за последнее время, которые вас порадовали:</div>
+        <div class="field"><label>1.</label><input type="text" id="decision_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="decision_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="decision_3"></div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Изменения и ожидания -->
+    <div class="step" id="step-4">
+      <div class="step-label">Блок 5</div>
+      <div class="step-title">Изменения и ожидания</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Пять изменений, которые вам хотелось бы видеть в своей компании:</div>
+        <div class="field"><label>1.</label><input type="text" id="change_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="change_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="change_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="change_4"></div>
+        <div class="field"><label>5.</label><input type="text" id="change_5"></div>
+      </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title">Четыре качества, которые вы ожидаете от своих подчинённых или членов команды:</div>
+        <div class="field"><label>1.</label><input type="text" id="expect_sub_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="expect_sub_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="expect_sub_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="expect_sub_4"></div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-ghost" id="btn-back" onclick="prevStep()" style="display:none">← Назад</button>
+      <button class="btn btn-teal" id="btn-next" onclick="nextStep()">Далее →</button>
+    </div>
+
+  </div>
+
+  <div id="screen-thanks" style="display:none">
+    <div class="welcome">
+      <div class="welcome-icon">✦</div>
+      <div class="welcome-title">Спасибо</div>
+      <div class="welcome-text">Ваши ответы об организации получены. Они помогут сделать нашу работу вместе по-настоящему точной.<br><br>До встречи.</div>
+      <div style="font-size:13px;color:var(--ink-faint);font-style:italic">Association de l'Intelligence Narrative · А. Аветисов</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = 'https://adin-ni-backend-production.up.railway.app/api';
+const TOTAL_STEPS = 5;
+let currentStep = 0;
+let token = null;
+
+const urlParams = new URLSearchParams(window.location.search);
+token = urlParams.get('token');
+
+window.onload = async () => {
+  if (!token) { showError('Ссылка недействительна — токен не найден.'); return; }
+  await loadInvitation();
+};
+
+async function loadInvitation() {
+  try {
+    const r = await fetch(API + '/v2/invitation/' + token);
+    const d = await r.json();
+    if (!r.ok || d.error) { showError(d.error || 'Ссылка недействительна.'); return; }
+    showScreen('form');
+    updateProgress();
+  } catch(e) {
+    showError('Ошибка соединения с сервером.');
+  }
+}
+
+function showScreen(name) {
+  ['loading','error','form','thanks'].forEach(s => {
+    document.getElementById('screen-' + s).style.display = s === name ? 'block' : 'none';
+  });
+}
+
+function showError(msg) {
+  document.getElementById('error-message').textContent = msg;
+  showScreen('error');
+}
+
+function updateProgress() {
+  const pct = Math.round((currentStep / TOTAL_STEPS) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('step-label-text').textContent = 'Шаг ' + (currentStep + 1) + ' из ' + TOTAL_STEPS;
+  document.getElementById('step-pct-text').textContent = pct + '%';
+  document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
+  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS - 1 ? 'Отправить ✓' : 'Далее →';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  currentStep = n;
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+function nextStep() {
+  if (currentStep === TOTAL_STEPS - 1) { submitForm(); return; }
+  showStep(currentStep + 1);
+}
+
+function prevStep() {
+  if (currentStep > 0) showStep(currentStep - 1);
+}
+
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? (el.value.trim() || null) : null;
+}
+
+async function submitForm() {
+  const answers = {
+    dream_word_1: getVal('dream_word_1'), dream_word_2: getVal('dream_word_2'),
+    dream_word_3: getVal('dream_word_3'), dream_word_4: getVal('dream_word_4'),
+    benchmark_1: getVal('benchmark_1'), benchmark_2: getVal('benchmark_2'), benchmark_3: getVal('benchmark_3'),
+    colleague_q_1: getVal('colleague_q_1'), colleague_q_2: getVal('colleague_q_2'),
+    colleague_q_3: getVal('colleague_q_3'), colleague_q_4: getVal('colleague_q_4'),
+    condition_1: getVal('condition_1'), condition_2: getVal('condition_2'), condition_3: getVal('condition_3'),
+    mgmt_style_1: getVal('mgmt_style_1'), mgmt_style_2: getVal('mgmt_style_2'), mgmt_style_3: getVal('mgmt_style_3'),
+    leader_q_1: getVal('leader_q_1'), leader_q_2: getVal('leader_q_2'),
+    leader_q_3: getVal('leader_q_3'), leader_q_4: getVal('leader_q_4'),
+    ceo_role_1: getVal('ceo_role_1'), ceo_role_2: getVal('ceo_role_2'), ceo_role_3: getVal('ceo_role_3'),
+    now_word_1: getVal('now_word_1'), now_word_2: getVal('now_word_2'),
+    now_word_3: getVal('now_word_3'), now_word_4: getVal('now_word_4'),
+    decision_1: getVal('decision_1'), decision_2: getVal('decision_2'), decision_3: getVal('decision_3'),
+    change_1: getVal('change_1'), change_2: getVal('change_2'), change_3: getVal('change_3'),
+    change_4: getVal('change_4'), change_5: getVal('change_5'),
+    expect_sub_1: getVal('expect_sub_1'), expect_sub_2: getVal('expect_sub_2'),
+    expect_sub_3: getVal('expect_sub_3'), expect_sub_4: getVal('expect_sub_4')
+  };
+
+  document.getElementById('btn-next').disabled = true;
+  document.getElementById('btn-next').textContent = 'Отправляем...';
+
+  try {
+    const r = await fetch(API + '/v2/submit/societe', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ token, answers })
+    });
+    const d = await r.json();
+    if (r.ok && d.success) {
+      showScreen('thanks');
+    } else {
+      alert('Ошибка отправки: ' + (d.error || 'попробуйте снова'));
+      document.getElementById('btn-next').disabled = false;
+      document.getElementById('btn-next').textContent = 'Отправить ✓';
+    }
+  } catch(e) {
+    alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+    document.getElementById('btn-next').disabled = false;
+    document.getElementById('btn-next').textContent = 'Отправить ✓';
+  }
+}
+</script>
+</body>
+</html>
