@@ -114,8 +114,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
         <div class="field"><label>Должность</label><input type="text" id="p-position"></div>
       </div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="field"><label>Страна</label><input type="text" id="p-country"></div>
-        <div class="field"><label>Сфера деятельности</label><input type="text" id="p-industry"></div>
+        <div class="field"><label>Страна</label>
+          <select id="p-country">
+            <option value="">— выберите —</option>
+            <optgroup label="СНГ">
+              <option>Россия</option><option>Армения</option><option>Казахстан</option>
+              <option>Беларусь</option><option>Украина</option><option>Узбекистан</option>
+              <option>Азербайджан</option><option>Молдова</option><option>Кыргызстан</option>
+              <option>Таджикистан</option><option>Туркменистан</option>
+            </optgroup>
+            <optgroup label="Европа (не ЕС)">
+              <option>Грузия</option><option>Швейцария</option><option>Великобритания</option>
+              <option>Норвегия</option><option>Исландия</option><option>Лихтенштейн</option>
+              <option>Сербия</option><option>Черногория</option>
+            </optgroup>
+            <optgroup label="Европейский союз">
+              <option>Австрия</option><option>Бельгия</option><option>Болгария</option>
+              <option>Венгрия</option><option>Германия</option><option>Греция</option>
+              <option>Дания</option><option>Ирландия</option><option>Испания</option>
+              <option>Италия</option><option>Кипр</option><option>Латвия</option>
+              <option>Литва</option><option>Люксембург</option><option>Мальта</option>
+              <option>Нидерланды</option><option>Польша</option><option>Португалия</option>
+              <option>Румыния</option><option>Словакия</option><option>Словения</option>
+              <option>Финляндия</option><option>Франция</option><option>Хорватия</option>
+              <option>Чехия</option><option>Швеция</option><option>Эстония</option>
+            </optgroup>
+            <optgroup label="Другие регионы">
+              <option>Аргентина</option><option>Бахрейн</option><option>Бразилия</option>
+              <option>Израиль</option><option>Канада</option><option>Китай</option>
+              <option>Мексика</option><option>ОАЭ</option><option>США</option><option>Турция</option>
+            </optgroup>
+            <option>Другая</option>
+          </select></div>
+        <div class="field"><label>Сфера деятельности</label>
+          <select id="p-industry">
+            <option value="">— выберите —</option>
+            <option>Менеджмент / Управление</option>
+            <option>Образование / Наука</option>
+            <option>Консультирование / Коучинг</option>
+            <option>Предпринимательство</option>
+            <option>HR / Организационное развитие</option>
+            <option>Медицина / Здравоохранение</option>
+            <option>Право / Финансы</option>
+            <option>Творческие профессии</option>
+            <option>Другое</option>
+          </select></div>
       </div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div class="field"><label>Возраст</label>
