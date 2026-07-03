@@ -161,15 +161,41 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
           </select></div>
       </div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="field"><label>Возраст</label>
-          <select id="p-age"><option value="">— выберите —</option><option>до 35</option><option>35–45</option><option>45–55</option><option>55+</option></select>
-        </div>
         <div class="field"><label>Пол</label>
-          <select id="p-gender"><option value="">— выберите —</option><option value="Мужской">Мужской</option><option value="Женский">Женский</option><option value="Другой">Другой</option></select>
+          <select id="p-gender"><option value="">— выберите —</option><option>Мужской</option><option>Женский</option><option>Предпочитаю не указывать</option></select>
+        </div>
+        <div class="field"><label>Возраст</label>
+          <select id="p-age"><option value="">— выберите —</option><option>До 25 лет</option><option>25–34</option><option>35–44</option><option>45–54</option><option>55–64</option><option>65 и старше</option><option>Предпочитаю не указывать</option></select>
         </div>
       </div>
-      <div class="field"><label>Образование</label>
-        <select id="p-education"><option value="">— выберите —</option><option>Среднее</option><option>Бакалавр</option><option>Магистр</option><option>PhD</option><option>MBA</option><option>Другое</option></select>
+      <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>Семейное положение</label>
+          <select id="p-marital"><option value="">— выберите —</option><option>Не состою в отношениях</option><option>В отношениях</option><option>В браке</option><option>Разведён(а)</option><option>Вдовец / вдова</option><option>Предпочитаю не отвечать</option></select>
+        </div>
+        <div class="field"><label>Есть ли у вас дети?</label>
+          <select id="p-children"><option value="">— выберите —</option><option>Нет</option><option>Да</option></select>
+        </div>
+      </div>
+      <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>Уровень образования</label>
+          <select id="p-education"><option value="">— выберите —</option><option>Среднее</option><option>Среднее специальное</option><option>Высшее (бакалавр)</option><option>Высшее (магистр)</option><option>Учёная степень (PhD, MD)</option><option>Другое</option></select>
+        </div>
+        <div class="field"><label>Направление образования</label>
+          <select id="p-edu-field"><option value="">— выберите —</option><option>Технические науки</option><option>Естественные науки</option><option>Социальные науки</option><option>Гуманитарные науки</option><option>Экономика и бизнес</option><option>Искусство и дизайн</option><option>Медицина</option><option>Военное дело</option><option>Другое</option></select>
+        </div>
+      </div>
+      <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>Родной язык</label>
+          <select id="p-lang-native"><option value="">— выберите —</option><option>Русский</option><option>Французский</option><option>Грузинский</option><option>Казахский</option><option>Английский</option><option>Армянский</option><option>Арабский</option><option>Испанский</option><option>Немецкий</option><option>Китайский</option><option>Другой</option></select>
+        </div>
+        <div class="field"><label>Дополнительный язык</label>
+          <select id="p-lang-add"><option value="">— выберите —</option><option>Русский</option><option>Французский</option><option>Грузинский</option><option>Казахский</option><option>Английский</option><option>Армянский</option><option>Арабский</option><option>Испанский</option><option>Немецкий</option><option>Китайский</option><option>Другой</option><option>Нет</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Культурная или религиозная традиция
+        <span style="font-weight:400;font-size:11px;color:var(--ink-faint)"> — не обязательно по степени веры</span>
+      </label>
+        <select id="p-religion"><option value="">— выберите —</option><option>Православие</option><option>Католицизм</option><option>Протестантизм</option><option>Ислам</option><option>Иудаизм</option><option>Буддизм</option><option>Индуизм</option><option>Светская культура</option><option>Другое</option><option>Предпочитаю не отвечать</option></select>
       </div>
     </div>
 
@@ -412,6 +438,12 @@ function prefillForm(p) {
   if (p.age_range) document.getElementById('p-age').value = p.age_range;
   if (p.gender) document.getElementById('p-gender').value = p.gender;
   if (p.education) document.getElementById('p-education').value = p.education;
+  if (p.marital_status) document.getElementById('p-marital').value = p.marital_status;
+  if (p.has_children) document.getElementById('p-children').value = p.has_children;
+  if (p.education_field) document.getElementById('p-edu-field').value = p.education_field;
+  if (p.lang_native) document.getElementById('p-lang-native').value = p.lang_native;
+  if (p.lang_additional) document.getElementById('p-lang-add').value = p.lang_additional;
+  if (p.religion) document.getElementById('p-religion').value = p.religion;
   if (p.name) {
     document.getElementById('welcome-name-title').textContent = 'Здравствуйте, ' + p.name.split(' ')[0] + '!';
   }
@@ -496,7 +528,10 @@ async function submitForm() {
     name: getVal('p-name'), company: getVal('p-company'),
     position: getVal('p-position'), country: getVal('p-country'),
     industry: getVal('p-industry'), age_range: getVal('p-age'),
-    gender: getVal('p-gender'), education: getVal('p-education')
+    gender: getVal('p-gender'), education: getVal('p-education'),
+    marital_status: getVal('p-marital'), has_children: getVal('p-children'),
+    education_field: getVal('p-edu-field'), lang_native: getVal('p-lang-native'),
+    lang_additional: getVal('p-lang-add'), religion: getVal('p-religion')
   };
 
   document.getElementById('btn-next').disabled = true;
