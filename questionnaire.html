@@ -192,11 +192,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
           <select id="p-lang-add"><option value="">— выберите —</option><option>Русский</option><option>Французский</option><option>Грузинский</option><option>Казахский</option><option>Английский</option><option>Армянский</option><option>Арабский</option><option>Испанский</option><option>Немецкий</option><option>Китайский</option><option>Другой</option><option>Нет</option></select>
         </div>
       </div>
-      <div class="field"><label>Культурная или религиозная традиция
-        <span style="font-weight:400;font-size:11px;color:var(--ink-faint)"> — не обязательно по степени веры</span>
+      <!-- Поле «религия» удалено: данные особой категории (ст. 9 GDPR). -->
+      <label style="display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:13px;color:#555">
+        <input type="checkbox" id="p-consent" style="margin-top:3px;width:17px;height:17px;flex-shrink:0">
+        <span>Я согласен(а) на обработку моих ответов и указанных данных в исследовательских целях Association de l'Intelligence Narrative® согласно GDPR. Данные обрабатываются нашими поставщиками услуг, в том числе за пределами ЕС, с мерами защиты; подробнее — в Политике конфиденциальности. Я знаю о праве отозвать согласие и потребовать удаления.</span>
       </label>
-        <select id="p-religion"><option value="">— выберите —</option><option>Православие</option><option>Католицизм</option><option>Протестантизм</option><option>Ислам</option><option>Иудаизм</option><option>Буддизм</option><option>Индуизм</option><option>Светская культура</option><option>Другое</option><option>Предпочитаю не отвечать</option></select>
-      </div>
     </div>
 
     <!-- STEP 1: Результаты и препятствия -->
@@ -443,7 +443,6 @@ function prefillForm(p) {
   if (p.education_field) document.getElementById('p-edu-field').value = p.education_field;
   if (p.lang_native) document.getElementById('p-lang-native').value = p.lang_native;
   if (p.lang_additional) document.getElementById('p-lang-add').value = p.lang_additional;
-  if (p.religion) document.getElementById('p-religion').value = p.religion;
   if (p.name) {
     document.getElementById('welcome-name-title').textContent = 'Здравствуйте, ' + p.name.split(' ')[0] + '!';
   }
@@ -505,6 +504,12 @@ function getVal(id) {
 }
 
 async function submitForm() {
+  const consentEl = document.getElementById('p-consent');
+  if (!consentEl || !consentEl.checked) {
+    alert('Необходимо согласие на обработку данных для продолжения.');
+    showStep(0);
+    return;
+  }
   const answers = {
     result_1: getVal('result_1'), result_2: getVal('result_2'),
     result_3: getVal('result_3'), result_4: getVal('result_4'),
@@ -531,7 +536,7 @@ async function submitForm() {
     gender: getVal('p-gender'), education: getVal('p-education'),
     marital_status: getVal('p-marital'), has_children: getVal('p-children'),
     education_field: getVal('p-edu-field'), lang_native: getVal('p-lang-native'),
-    lang_additional: getVal('p-lang-add'), religion: getVal('p-religion')
+    lang_additional: getVal('p-lang-add')
   };
 
   document.getElementById('btn-next').disabled = true;
@@ -541,7 +546,7 @@ async function submitForm() {
     const r = await fetch(API + '/v2/submit/questionnaire', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ token, answers, respondent })
+      body: JSON.stringify({ token, answers, respondent, consent: true })
     });
     const d = await r.json();
     if (r.ok && d.success) {
