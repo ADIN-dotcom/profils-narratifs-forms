@@ -83,7 +83,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 <div class="container">
 
   <!-- LOADING -->
-  <div id="screen-loading">
+  <!-- ВХОД ПО КОДУ -->
+  <div id="screen-login">
+    <div style="max-width:420px;margin:60px auto;text-align:center;padding:0 20px">
+      <h1 style="font-size:24px;margin-bottom:8px">Questionnaire</h1>
+      <p style="color:#8888a8;margin-bottom:24px">Введите код доступа из письма-приглашения</p>
+      <input id="code-input" type="text" placeholder="ADIN-XXXX" maxlength="9"
+        oninput="this.value=this.value.toUpperCase()"
+        onkeydown="if(event.key==='Enter')verifyCode()"
+        style="width:100%;padding:14px;font-size:20px;text-align:center;letter-spacing:.15em;border:1.5px solid #e8e4dc;border-radius:8px;margin-bottom:12px;box-sizing:border-box">
+      <div id="login-error" style="display:none;color:#c0392b;font-size:13px;margin-bottom:12px">Код не найден. Проверьте письмо и попробуйте снова.</div>
+      <button id="btn-enter" onclick="verifyCode()" style="width:100%;padding:14px;background:#c8432a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer">Войти →</button>
+    </div>
+  </div>
+
+  <div id="screen-loading" style="display:none">
     <div class="spinner"></div>
   </div>
 
@@ -397,30 +411,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 const API = 'https://adin-ni-backend-production.up.railway.app/api';
 const TOTAL_STEPS = 6; // 0..5
 let currentStep = 0;
-let token = null;
-let participantData = null;
+let code = null;
 let abAnswers = {};
 
-// Get token from URL
-const urlParams = new URLSearchParams(window.location.search);
-token = urlParams.get('token');
-
-window.onload = async () => {
-  if (!token) { showError('Ссылка недействительна — токен не найден.'); return; }
-  await loadParticipant();
+window.onload = () => {
+  showScreen('login');
 };
 
-async function loadParticipant() {
+async function verifyCode() {
+  const c = document.getElementById('code-input').value.trim().toUpperCase();
+  if (!c || c.length < 6) {
+    document.getElementById('login-error').style.display = 'block';
+    return;
+  }
+  const btn = document.getElementById('btn-enter');
+  btn.disabled = true; btn.textContent = 'Проверяем…';
+  document.getElementById('login-error').style.display = 'none';
   try {
-    const r = await fetch(API + '/v2/invitation/' + token);
-    const d = await r.json();
-    if (!r.ok || d.error) { showError(d.error || 'Ссылка недействительна.'); return; }
-    participantData = d;
-    prefillForm(d);
-    showScreen('form');
-    updateProgress();
+    const r = await fetch(API + '/test/verify-code', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({code: c}),
+    });
+    const data = await r.json();
+    if (data.valid) {
+      code = c;
+      showScreen('form');
+      updateProgress();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Войти →';
+    }
   } catch(e) {
-    showError('Ошибка соединения с сервером.');
+    document.getElementById('login-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Войти →';
   }
 }
 
@@ -438,7 +462,7 @@ function prefillForm(p) {
 }
 
 function showScreen(name) {
-  ['loading','error','form','thanks'].forEach(s => {
+  ['login','loading','error','form','thanks'].forEach(s => {
     document.getElementById('screen-' + s).style.display = s === name ? 'block' : 'none';
   });
 }
@@ -530,7 +554,7 @@ async function submitForm() {
     const r = await fetch(API + '/v2/submit/questionnaire', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ token, answers, respondent, consent: true })
+      body: JSON.stringify({ code, answers, respondent, consent: true })
     });
     const d = await r.json();
     if (r.ok && d.success) {
