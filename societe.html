@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profils Narratifs — Опросник о компании</title>
+<title data-i18n="title">Profils Narratifs — Опросник о компании</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -50,7 +50,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
 <div class="header">
   <div class="header-brand">Association de l'Intelligence Narrative</div>
-  <div class="header-title">Profils Narratifs — Опросник о компании</div>
+  <div class="header-title" data-i18n="title">Profils Narratifs — Опросник о компании</div>
 </div>
 
 <div class="container">
@@ -59,20 +59,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
   <div id="screen-login">
     <div style="max-width:420px;margin:60px auto;text-align:center;padding:0 20px">
       <h1 style="font-size:24px;margin-bottom:8px">SOCIETE</h1>
-      <p style="color:#8888a8;margin-bottom:24px">Введите код доступа из письма-приглашения</p>
+      <p style="color:#8888a8;margin-bottom:24px" data-i18n="login_sub">Введите код доступа из письма-приглашения</p>
       <input id="code-input" type="text" placeholder="ADIN-XXXX" maxlength="9"
         oninput="this.value=this.value.toUpperCase()"
         onkeydown="if(event.key==='Enter')verifyCode()"
         style="width:100%;padding:14px;font-size:20px;text-align:center;letter-spacing:.15em;border:1.5px solid #e8e4dc;border-radius:8px;margin-bottom:12px;box-sizing:border-box">
-      <div id="login-error" style="display:none;color:#c0392b;font-size:13px;margin-bottom:12px">Код не найден. Проверьте письмо и попробуйте снова.</div>
-      <button id="btn-enter" onclick="verifyCode()" style="width:100%;padding:14px;background:#c8432a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer">Войти →</button>
+      <div id="login-error" style="display:none;color:#c0392b;font-size:13px;margin-bottom:12px" data-i18n="login_error">Код не найден. Проверьте письмо и попробуйте снова.</div>
+      <button id="btn-enter" onclick="verifyCode()" style="width:100%;padding:14px;background:#c8432a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer" data-i18n="btn_enter">Войти →</button>
     </div>
   </div>
 
   <div id="screen-loading" style="display:none"><div class="spinner"></div></div>
 
   <div id="screen-error" style="display:none">
-    <div class="error-box" id="error-message">Ссылка недействительна или истекла.</div>
+    <div class="error-box" id="error-message" data-i18n="link_error">Ссылка недействительна или истекла.</div>
   </div>
 
   <div id="screen-form" style="display:none">
@@ -87,12 +87,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 0: Компания мечты -->
     <div class="step active" id="step-0">
-      <div class="step-label">Блок 1</div>
-      <div class="step-title">Компания мечты</div>
-      <div class="step-desc">Представьте идеальную компанию — такую, в которой вы работаете с полной отдачей.</div>
+      <div class="step-label" data-i18n="s0_label">Блок 1</div>
+      <div class="step-title" data-i18n="s0_title">Компания мечты</div>
+      <div class="step-desc" data-i18n="s0_desc">Представьте идеальную компанию — такую, в которой вы работаете с полной отдачей.</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Четыре слова или выражения, которые характеризуют вашу компанию-мечту:</div>
+        <div class="fields-group-title" data-i18n="q_dream">Четыре слова или выражения, которые характеризуют вашу компанию-мечту:</div>
         <div class="field"><label>1.</label><input type="text" id="dream_word_1"></div>
         <div class="field"><label>2.</label><input type="text" id="dream_word_2"></div>
         <div class="field"><label>3.</label><input type="text" id="dream_word_3"></div>
@@ -100,8 +100,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Три компании (не обязательно в вашей отрасли), которые кажутся вам образцовыми, и почему:</div>
-        <div class="field"><label>1.</label><input type="text" id="benchmark_1" placeholder="Название компании и причина"></div>
+        <div class="fields-group-title" data-i18n="q_bench">Три компании (не обязательно в вашей отрасли), которые кажутся вам образцовыми, и почему:</div>
+        <div class="field"><label>1.</label><input type="text" id="benchmark_1" data-i18n-ph="ph_bench" placeholder="Название компании и причина"></div>
         <div class="field"><label>2.</label><input type="text" id="benchmark_2"></div>
         <div class="field"><label>3.</label><input type="text" id="benchmark_3"></div>
       </div>
@@ -109,11 +109,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 1: Коллеги и условия -->
     <div class="step" id="step-1">
-      <div class="step-label">Блок 2</div>
-      <div class="step-title">Коллеги и условия работы</div>
+      <div class="step-label" data-i18n="s1_label">Блок 2</div>
+      <div class="step-title" data-i18n="s1_title">Коллеги и условия работы</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Четыре качества, которыми должны обладать ваши идеальные коллеги:</div>
+        <div class="fields-group-title" data-i18n="q_colleague">Четыре качества, которыми должны обладать ваши идеальные коллеги:</div>
         <div class="field"><label>1.</label><input type="text" id="colleague_q_1"></div>
         <div class="field"><label>2.</label><input type="text" id="colleague_q_2"></div>
         <div class="field"><label>3.</label><input type="text" id="colleague_q_3"></div>
@@ -121,7 +121,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Три условия, необходимые для того, чтобы вы работали в полную силу:</div>
+        <div class="fields-group-title" data-i18n="q_conditions">Три условия, необходимые для того, чтобы вы работали в полную силу:</div>
         <div class="field"><label>1.</label><input type="text" id="condition_1"></div>
         <div class="field"><label>2.</label><input type="text" id="condition_2"></div>
         <div class="field"><label>3.</label><input type="text" id="condition_3"></div>
@@ -130,18 +130,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 2: Управление -->
     <div class="step" id="step-2">
-      <div class="step-label">Блок 3</div>
-      <div class="step-title">Стиль управления</div>
+      <div class="step-label" data-i18n="s2_label">Блок 3</div>
+      <div class="step-title" data-i18n="s2_title">Стиль управления</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Три характеристики идеального стиля управления для вас лично:</div>
+        <div class="fields-group-title" data-i18n="q_mgmt">Три характеристики идеального стиля управления для вас лично:</div>
         <div class="field"><label>1.</label><input type="text" id="mgmt_style_1"></div>
         <div class="field"><label>2.</label><input type="text" id="mgmt_style_2"></div>
         <div class="field"><label>3.</label><input type="text" id="mgmt_style_3"></div>
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Если бы вы были руководителем — четыре качества, которые вы бы хотели развивать в себе:</div>
+        <div class="fields-group-title" data-i18n="q_leader">Если бы вы были руководителем — четыре качества, которые вы бы хотели развивать в себе:</div>
         <div class="field"><label>1.</label><input type="text" id="leader_q_1"></div>
         <div class="field"><label>2.</label><input type="text" id="leader_q_2"></div>
         <div class="field"><label>3.</label><input type="text" id="leader_q_3"></div>
@@ -151,18 +151,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 3: Роли и решения -->
     <div class="step" id="step-3">
-      <div class="step-label">Блок 4</div>
-      <div class="step-title">Роли и принятие решений</div>
+      <div class="step-label" data-i18n="s3_label">Блок 4</div>
+      <div class="step-title" data-i18n="s3_title">Роли и принятие решений</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Три роли, которые должен в первую очередь выполнять генеральный директор вашей компании:</div>
+        <div class="fields-group-title" data-i18n="q_ceo">Три роли, которые должен в первую очередь выполнять генеральный директор вашей компании:</div>
         <div class="field"><label>1.</label><input type="text" id="ceo_role_1"></div>
         <div class="field"><label>2.</label><input type="text" id="ceo_role_2"></div>
         <div class="field"><label>3.</label><input type="text" id="ceo_role_3"></div>
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Четыре слова или выражения, которые характеризуют вашу нынешнюю компанию:</div>
+        <div class="fields-group-title" data-i18n="q_now">Четыре слова или выражения, которые характеризуют вашу нынешнюю компанию:</div>
         <div class="field"><label>1.</label><input type="text" id="now_word_1"></div>
         <div class="field"><label>2.</label><input type="text" id="now_word_2"></div>
         <div class="field"><label>3.</label><input type="text" id="now_word_3"></div>
@@ -170,7 +170,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Три решения, принятые в вашей компании за последнее время, которые вас порадовали:</div>
+        <div class="fields-group-title" data-i18n="q_decisions">Три решения, принятые в вашей компании за последнее время, которые вас порадовали:</div>
         <div class="field"><label>1.</label><input type="text" id="decision_1"></div>
         <div class="field"><label>2.</label><input type="text" id="decision_2"></div>
         <div class="field"><label>3.</label><input type="text" id="decision_3"></div>
@@ -179,11 +179,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 4: Изменения и ожидания -->
     <div class="step" id="step-4">
-      <div class="step-label">Блок 5</div>
-      <div class="step-title">Изменения и ожидания</div>
+      <div class="step-label" data-i18n="s4_label">Блок 5</div>
+      <div class="step-title" data-i18n="s4_title">Изменения и ожидания</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Пять изменений, которые вам хотелось бы видеть в своей компании:</div>
+        <div class="fields-group-title" data-i18n="q_changes">Пять изменений, которые вам хотелось бы видеть в своей компании:</div>
         <div class="field"><label>1.</label><input type="text" id="change_1"></div>
         <div class="field"><label>2.</label><input type="text" id="change_2"></div>
         <div class="field"><label>3.</label><input type="text" id="change_3"></div>
@@ -192,7 +192,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Четыре качества, которые вы ожидаете от своих подчинённых или членов команды:</div>
+        <div class="fields-group-title" data-i18n="q_expect_sub">Четыре качества, которые вы ожидаете от своих подчинённых или членов команды:</div>
         <div class="field"><label>1.</label><input type="text" id="expect_sub_1"></div>
         <div class="field"><label>2.</label><input type="text" id="expect_sub_2"></div>
         <div class="field"><label>3.</label><input type="text" id="expect_sub_3"></div>
@@ -200,13 +200,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
       <label style="display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-size:13px;color:#555">
         <input type="checkbox" id="p-consent" style="margin-top:3px;width:17px;height:17px;flex-shrink:0">
-        <span>Я согласен(а) на обработку моих ответов в исследовательских целях Association de l'Intelligence Narrative® согласно GDPR. Подробнее — в Политике конфиденциальности. Я знаю о праве отозвать согласие и потребовать удаления.</span>
+        <span data-i18n="consent">Я согласен(а) на обработку моих ответов в исследовательских целях Association de l'Intelligence Narrative® согласно GDPR. Подробнее — в Политике конфиденциальности. Я знаю о праве отозвать согласие и потребовать удаления.</span>
       </label>
     </div>
 
     <div class="nav">
-      <button class="btn btn-ghost" id="btn-back" onclick="prevStep()" style="display:none">← Назад</button>
-      <button class="btn btn-teal" id="btn-next" onclick="nextStep()">Далее →</button>
+      <button class="btn btn-ghost" id="btn-back" onclick="prevStep()" style="display:none" data-i18n="btn_back">← Назад</button>
+      <button class="btn btn-teal" id="btn-next" onclick="nextStep()" data-i18n="btn_next">Далее →</button>
     </div>
 
   </div>
@@ -214,9 +214,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
   <div id="screen-thanks" style="display:none">
     <div class="welcome">
       <div class="welcome-icon">✦</div>
-      <div class="welcome-title">Спасибо</div>
-      <div class="welcome-text">Ваши ответы об организации получены. Они помогут сделать нашу работу вместе по-настоящему точной.<br><br>До встречи.</div>
-      <div style="font-size:13px;color:var(--ink-faint);font-style:italic">Association de l'Intelligence Narrative · А. Аветисов</div>
+      <div class="welcome-title" data-i18n="thanks_title">Спасибо</div>
+      <div class="welcome-text" data-i18n="thanks_text">Ваши ответы об организации получены. Они помогут сделать нашу работу вместе по-настоящему точной.<br><br>До встречи.</div>
+      <div style="font-size:13px;color:var(--ink-faint);font-style:italic" data-i18n="thanks_sign">Association de l'Intelligence Narrative · А. Аветисов</div>
     </div>
   </div>
 
@@ -225,6 +225,92 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 <script>
 const API = 'https://adin-ni-backend-production.up.railway.app/api';
 const TOTAL_STEPS = 5;
+
+// ── ЯЗЫК ─────────────────────────────────────────────────────────────────────
+// Язык фиксируется при выдаче кода (дашборд) и приходит из /test/verify-code —
+// участник его не выбирает (та же схема, что в НИ-тесте). Русский текст живёт
+// в самой разметке; для 'en' элементы с data-i18n переписываются из I18N.en.
+// Тексты вопросов на EN дословно совпадают с подписями в письме фасилитатору
+// (adin-ni-backend, services/email.js, PN_LABELS_BY_LANG).
+let LANG = 'ru';
+const I18N = {
+  ru: {
+    "btn_enter": "Войти →",
+    "btn_next": "Далее →",
+    "btn_checking": "Проверяем…",
+    "btn_submit": "Отправить ✓",
+    "btn_sending": "Отправляем...",
+    "step_of": "Шаг {n} из {total}",
+    "select_ph": "— выберите —",
+    "consent_alert": "Необходимо согласие на обработку данных для продолжения.",
+    "submit_error": "Ошибка отправки: ",
+    "try_again": "попробуйте снова",
+    "conn_error": "Ошибка соединения. Проверьте интернет и попробуйте снова."
+},
+  en: {
+    "login_sub": "Enter the access code from your invitation email",
+    "login_error": "Code not found. Check the email and try again.",
+    "btn_enter": "Enter →",
+    "link_error": "The link is invalid or has expired.",
+    "btn_back": "← Back",
+    "btn_next": "Next →",
+    "title": "Profils Narratifs — Questionnaire about the company",
+    "s0_label": "Block 1",
+    "s0_title": "Dream company",
+    "s0_desc": "Imagine the ideal company — one where you work with full commitment.",
+    "q_dream": "Four words or expressions that describe your dream company:",
+    "q_bench": "Three companies (not necessarily in your industry) that you consider exemplary, and why:",
+    "s1_label": "Block 2",
+    "s1_title": "Colleagues and working conditions",
+    "q_colleague": "Four qualities your ideal colleagues should have:",
+    "q_conditions": "Three conditions you need in order to work at full capacity:",
+    "s2_label": "Block 3",
+    "s2_title": "Management style",
+    "q_mgmt": "Three characteristics of the ideal management style for you personally:",
+    "q_leader": "If you were a leader — four qualities you would like to develop in yourself:",
+    "s3_label": "Block 4",
+    "s3_title": "Roles and decision-making",
+    "q_ceo": "Three roles your company’s CEO should fulfil first and foremost:",
+    "q_now": "Four words or expressions that describe your current company:",
+    "q_decisions": "Three recent decisions made in your company that pleased you:",
+    "s4_label": "Block 5",
+    "s4_title": "Changes and expectations",
+    "q_changes": "Five changes you would like to see in your company:",
+    "q_expect_sub": "Four qualities you expect from your subordinates or team members:",
+    "consent": "I consent to the processing of my answers for research purposes by Association de l'Intelligence Narrative® in accordance with GDPR. See the Privacy Policy for details. I know that I can withdraw my consent and request deletion.",
+    "thanks_title": "Thank you",
+    "thanks_text": "Your answers about the organisation have been received. They will help make our work together truly precise.<br><br>See you soon.",
+    "thanks_sign": "Association de l'Intelligence Narrative · A. Avetisov",
+    "ph_bench": "Company name and reason",
+    "btn_checking": "Checking…",
+    "btn_submit": "Submit ✓",
+    "btn_sending": "Sending...",
+    "step_of": "Step {n} of {total}",
+    "select_ph": "— select —",
+    "consent_alert": "Consent to data processing is required to continue.",
+    "submit_error": "Submission error: ",
+    "try_again": "please try again",
+    "conn_error": "Connection error. Check your internet connection and try again."
+},
+};
+const T = () => I18N[LANG];
+
+function applyLanguage(lang) {
+  LANG = (lang === 'en') ? 'en' : 'ru';
+  document.documentElement.lang = LANG;
+  if (LANG === 'en') {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = I18N.en[el.getAttribute('data-i18n')];
+      if (v == null) return;
+      if (v.indexOf('<br') >= 0) el.innerHTML = v; else el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const v = I18N.en[el.getAttribute('data-i18n-ph')]; if (v != null) el.placeholder = v;
+    });
+    document.title = I18N.en.title;
+  }
+}
+
 let currentStep = 0;
 let code = null;
 
@@ -239,7 +325,7 @@ async function verifyCode() {
     return;
   }
   const btn = document.getElementById('btn-enter');
-  btn.disabled = true; btn.textContent = 'Проверяем…';
+  btn.disabled = true; btn.textContent = T().btn_checking;
   document.getElementById('login-error').style.display = 'none';
   try {
     const r = await fetch(API + '/test/verify-code', {
@@ -250,15 +336,16 @@ async function verifyCode() {
     const data = await r.json();
     if (data.valid) {
       code = c;
+      applyLanguage(data.language || 'ru');
       showScreen('form');
       updateProgress();
     } else {
       document.getElementById('login-error').style.display = 'block';
-      btn.disabled = false; btn.textContent = 'Войти →';
+      btn.disabled = false; btn.textContent = T().btn_enter;
     }
   } catch(e) {
     document.getElementById('login-error').style.display = 'block';
-    btn.disabled = false; btn.textContent = 'Войти →';
+    btn.disabled = false; btn.textContent = T().btn_enter;
   }
 }
 
@@ -276,10 +363,10 @@ function showError(msg) {
 function updateProgress() {
   const pct = Math.round((currentStep / TOTAL_STEPS) * 100);
   document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('step-label-text').textContent = 'Шаг ' + (currentStep + 1) + ' из ' + TOTAL_STEPS;
+  document.getElementById('step-label-text').textContent = T().step_of.replace('{n}', currentStep + 1).replace('{total}', TOTAL_STEPS);
   document.getElementById('step-pct-text').textContent = pct + '%';
   document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
-  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS - 1 ? 'Отправить ✓' : 'Далее →';
+  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS - 1 ? T().btn_submit : T().btn_next;
 }
 
 function showStep(n) {
@@ -307,7 +394,7 @@ function getVal(id) {
 async function submitForm() {
   const consentEl = document.getElementById('p-consent');
   if (!consentEl || !consentEl.checked) {
-    alert('Необходимо согласие на обработку данных для продолжения.');
+    alert(T().consent_alert);
     return;
   }
   const answers = {
@@ -331,7 +418,7 @@ async function submitForm() {
   };
 
   document.getElementById('btn-next').disabled = true;
-  document.getElementById('btn-next').textContent = 'Отправляем...';
+  document.getElementById('btn-next').textContent = T().btn_sending;
 
   try {
     const r = await fetch(API + '/v2/submit/societe', {
@@ -343,14 +430,14 @@ async function submitForm() {
     if (r.ok && d.success) {
       showScreen('thanks');
     } else {
-      alert('Ошибка отправки: ' + (d.error || 'попробуйте снова'));
+      alert(T().submit_error + (d.error || T().try_again));
       document.getElementById('btn-next').disabled = false;
-      document.getElementById('btn-next').textContent = 'Отправить ✓';
+      document.getElementById('btn-next').textContent = T().btn_submit;
     }
   } catch(e) {
-    alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+    alert(T().conn_error);
     document.getElementById('btn-next').disabled = false;
-    document.getElementById('btn-next').textContent = 'Отправить ✓';
+    document.getElementById('btn-next').textContent = T().btn_submit;
   }
 }
 </script>

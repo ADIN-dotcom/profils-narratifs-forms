@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profils Narratifs — Опросник о себе</title>
+<title data-i18n="title">Profils Narratifs — Опросник о себе</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -76,7 +76,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 <div class="header">
   <div>
     <div class="header-brand">Association de l'Intelligence Narrative</div>
-    <div class="header-title">Profils Narratifs — Опросник о себе</div>
+    <div class="header-title" data-i18n="title">Profils Narratifs — Опросник о себе</div>
   </div>
 </div>
 
@@ -87,13 +87,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
   <div id="screen-login">
     <div style="max-width:420px;margin:60px auto;text-align:center;padding:0 20px">
       <h1 style="font-size:24px;margin-bottom:8px">Questionnaire</h1>
-      <p style="color:#8888a8;margin-bottom:24px">Введите код доступа из письма-приглашения</p>
+      <p style="color:#8888a8;margin-bottom:24px" data-i18n="login_sub">Введите код доступа из письма-приглашения</p>
       <input id="code-input" type="text" placeholder="ADIN-XXXX" maxlength="9"
         oninput="this.value=this.value.toUpperCase()"
         onkeydown="if(event.key==='Enter')verifyCode()"
         style="width:100%;padding:14px;font-size:20px;text-align:center;letter-spacing:.15em;border:1.5px solid #e8e4dc;border-radius:8px;margin-bottom:12px;box-sizing:border-box">
-      <div id="login-error" style="display:none;color:#c0392b;font-size:13px;margin-bottom:12px">Код не найден. Проверьте письмо и попробуйте снова.</div>
-      <button id="btn-enter" onclick="verifyCode()" style="width:100%;padding:14px;background:#c8432a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer">Войти →</button>
+      <div id="login-error" style="display:none;color:#c0392b;font-size:13px;margin-bottom:12px" data-i18n="login_error">Код не найден. Проверьте письмо и попробуйте снова.</div>
+      <button id="btn-enter" onclick="verifyCode()" style="width:100%;padding:14px;background:#c8432a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer" data-i18n="btn_enter">Войти →</button>
     </div>
   </div>
 
@@ -103,7 +103,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
   <!-- ERROR -->
   <div id="screen-error" style="display:none">
-    <div class="error-box" id="error-message">Ссылка недействительна или истекла.</div>
+    <div class="error-box" id="error-message" data-i18n="link_error">Ссылка недействительна или истекла.</div>
   </div>
 
   <!-- FORM -->
@@ -119,11 +119,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 0: Данные участника -->
     <div class="step active" id="step-0">
-      <div class="step-label">Добро пожаловать</div>
-      <div class="step-title" id="welcome-name-title">Рады вас видеть!</div>
-      <div class="step-desc">Прежде чем начать, укажите немного о себе — это займёт 1 минуту. Данные анонимны и используются только для обезличенной статистики.</div>
+      <div class="step-label" data-i18n="s0_label">Добро пожаловать</div>
+      <div class="step-title" id="welcome-name-title" data-i18n="s0_title">Рады вас видеть!</div>
+      <div class="step-desc" data-i18n="s0_desc">Прежде чем начать, укажите немного о себе — это займёт 1 минуту. Данные анонимны и используются только для обезличенной статистики.</div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="field"><label>Страна</label>
+        <div class="field"><label data-i18n="lbl_country">Страна</label>
           <select id="p-country">
             <option value="">— выберите —</option>
             <optgroup label="СНГ">
@@ -155,7 +155,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
             </optgroup>
             <option>Другая</option>
           </select></div>
-        <div class="field"><label>Сфера деятельности</label>
+        <div class="field"><label data-i18n="lbl_industry">Сфера деятельности</label>
           <select id="p-industry">
             <option value="">— выберите —</option>
             <option>Менеджмент / Управление</option>
@@ -170,52 +170,52 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
           </select></div>
       </div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="field"><label>Пол</label>
+        <div class="field"><label data-i18n="lbl_gender">Пол</label>
           <select id="p-gender"><option value="">— выберите —</option><option>Мужской</option><option>Женский</option><option>Предпочитаю не указывать</option></select>
         </div>
-        <div class="field"><label>Возраст</label>
+        <div class="field"><label data-i18n="lbl_age">Возраст</label>
           <select id="p-age"><option value="">— выберите —</option><option>До 25 лет</option><option>25–34</option><option>35–44</option><option>45–54</option><option>55–64</option><option>65 и старше</option><option>Предпочитаю не указывать</option></select>
         </div>
       </div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="field"><label>Семейное положение</label>
+        <div class="field"><label data-i18n="lbl_marital">Семейное положение</label>
           <select id="p-marital"><option value="">— выберите —</option><option>Не состою в отношениях</option><option>В отношениях</option><option>В браке</option><option>Разведён(а)</option><option>Вдовец / вдова</option><option>Предпочитаю не отвечать</option></select>
         </div>
-        <div class="field"><label>Есть ли у вас дети?</label>
+        <div class="field"><label data-i18n="lbl_children">Есть ли у вас дети?</label>
           <select id="p-children"><option value="">— выберите —</option><option>Нет</option><option>Да</option></select>
         </div>
       </div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="field"><label>Уровень образования</label>
+        <div class="field"><label data-i18n="lbl_education">Уровень образования</label>
           <select id="p-education"><option value="">— выберите —</option><option>Среднее</option><option>Среднее специальное</option><option>Высшее (бакалавр)</option><option>Высшее (магистр)</option><option>Учёная степень (PhD, MD)</option><option>Другое</option></select>
         </div>
-        <div class="field"><label>Направление образования</label>
+        <div class="field"><label data-i18n="lbl_edu_field">Направление образования</label>
           <select id="p-edu-field"><option value="">— выберите —</option><option>Технические науки</option><option>Естественные науки</option><option>Социальные науки</option><option>Гуманитарные науки</option><option>Экономика и бизнес</option><option>Искусство и дизайн</option><option>Медицина</option><option>Военное дело</option><option>Другое</option></select>
         </div>
       </div>
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="field"><label>Родной язык</label>
+        <div class="field"><label data-i18n="lbl_lang_native">Родной язык</label>
           <select id="p-lang-native"><option value="">— выберите —</option><option>Русский</option><option>Французский</option><option>Грузинский</option><option>Казахский</option><option>Английский</option><option>Армянский</option><option>Арабский</option><option>Испанский</option><option>Немецкий</option><option>Китайский</option><option>Другой</option></select>
         </div>
-        <div class="field"><label>Дополнительный язык</label>
+        <div class="field"><label data-i18n="lbl_lang_add">Дополнительный язык</label>
           <select id="p-lang-add"><option value="">— выберите —</option><option>Русский</option><option>Французский</option><option>Грузинский</option><option>Казахский</option><option>Английский</option><option>Армянский</option><option>Арабский</option><option>Испанский</option><option>Немецкий</option><option>Китайский</option><option>Другой</option><option>Нет</option></select>
         </div>
       </div>
       <!-- Поле «религия» удалено: данные особой категории (ст. 9 GDPR). -->
       <label style="display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:13px;color:#555">
         <input type="checkbox" id="p-consent" style="margin-top:3px;width:17px;height:17px;flex-shrink:0">
-        <span>Я согласен(а) на обработку моих ответов и указанных данных в исследовательских целях Association de l'Intelligence Narrative® согласно GDPR. Подробнее — в Политике конфиденциальности. Я знаю о праве отозвать согласие и потребовать удаления.</span>
+        <span data-i18n="consent">Я согласен(а) на обработку моих ответов и указанных данных в исследовательских целях Association de l'Intelligence Narrative® согласно GDPR. Подробнее — в Политике конфиденциальности. Я знаю о праве отозвать согласие и потребовать удаления.</span>
       </label>
     </div>
 
     <!-- STEP 1: Результаты и препятствия -->
     <div class="step" id="step-1">
-      <div class="step-label">Блок 1</div>
-      <div class="step-title">Результаты и препятствия</div>
-      <div class="step-desc">Пишите первое, что приходит в голову — именно это будет самым ценным.</div>
+      <div class="step-label" data-i18n="s1_label">Блок 1</div>
+      <div class="step-title" data-i18n="s1_title">Результаты и препятствия</div>
+      <div class="step-desc" data-i18n="s1_desc">Пишите первое, что приходит в голову — именно это будет самым ценным.</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Четыре результата, которых Вы хотите достичь в самое ближайшее время:</div>
+        <div class="fields-group-title" data-i18n="q_results">Четыре результата, которых Вы хотите достичь в самое ближайшее время:</div>
         <div class="field"><label>1.</label><input type="text" id="result_1"></div>
         <div class="field"><label>2.</label><input type="text" id="result_2"></div>
         <div class="field"><label>3.</label><input type="text" id="result_3"></div>
@@ -223,7 +223,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Что мешает вам в вашем окружении достичь этих результатов?</div>
+        <div class="fields-group-title" data-i18n="q_obstacles">Что мешает вам в вашем окружении достичь этих результатов?</div>
         <div class="field"><label>1.</label><input type="text" id="obstacle_1"></div>
         <div class="field"><label>2.</label><input type="text" id="obstacle_2"></div>
         <div class="field"><label>3.</label><input type="text" id="obstacle_3"></div>
@@ -233,12 +233,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 2: Навыки и преимущества -->
     <div class="step" id="step-2">
-      <div class="step-label">Блок 2</div>
-      <div class="step-title">Навыки и преимущества</div>
-      <div class="step-desc">Отвечайте честно — здесь нет правильных ответов.</div>
+      <div class="step-label" data-i18n="s2_label">Блок 2</div>
+      <div class="step-title" data-i18n="s2_title">Навыки и преимущества</div>
+      <div class="step-desc" data-i18n="s2_desc">Отвечайте честно — здесь нет правильных ответов.</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Каких навыков или знаний вам не хватает, чтобы достичь этих результатов?</div>
+        <div class="fields-group-title" data-i18n="q_skills">Каких навыков или знаний вам не хватает, чтобы достичь этих результатов?</div>
         <div class="field"><label>1.</label><input type="text" id="skill_1"></div>
         <div class="field"><label>2.</label><input type="text" id="skill_2"></div>
         <div class="field"><label>3.</label><input type="text" id="skill_3"></div>
@@ -246,7 +246,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Каковы ваши личные и профессиональные преимущества? Чем вы отличаетесь от других? Вспомните момент, когда коллега или близкий человек сказал о вас что-то, что вас удивило или тронуло.</div>
+        <div class="fields-group-title" data-i18n="q_strengths">Каковы ваши личные и профессиональные преимущества? Чем вы отличаетесь от других? Вспомните момент, когда коллега или близкий человек сказал о вас что-то, что вас удивило или тронуло.</div>
         <div class="field"><label>1.</label><input type="text" id="strength_1"></div>
         <div class="field"><label>2.</label><input type="text" id="strength_2"></div>
         <div class="field"><label>3.</label><input type="text" id="strength_3"></div>
@@ -256,11 +256,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 
     <!-- STEP 3: Ценности и ощущение -->
     <div class="step" id="step-3">
-      <div class="step-label">Блок 3</div>
-      <div class="step-title">Ценности и ощущение</div>
+      <div class="step-label" data-i18n="s3_label">Блок 3</div>
+      <div class="step-title" data-i18n="s3_title">Ценности и ощущение</div>
 
       <div class="fields-group">
-        <div class="fields-group-title">Что для вас действительно важно и ценно в этом мире?</div>
+        <div class="fields-group-title" data-i18n="q_values">Что для вас действительно важно и ценно в этом мире?</div>
         <div class="field"><label>1.</label><input type="text" id="value_1"></div>
         <div class="field"><label>2.</label><input type="text" id="value_2"></div>
         <div class="field"><label>3.</label><input type="text" id="value_3"></div>
@@ -268,129 +268,129 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="field">
-        <label>Опишите одним-двумя предложениями, как вы сейчас себя чувствуете в компании — не анализ, а ощущение.</label>
-        <textarea id="feeling_now" placeholder="Например: чувствую усталость но вижу потенциал..."></textarea>
+        <label data-i18n="q_feeling">Опишите одним-двумя предложениями, как вы сейчас себя чувствуете в компании — не анализ, а ощущение.</label>
+        <textarea id="feeling_now" data-i18n-ph="ph_feeling" placeholder="Например: чувствую усталость но вижу потенциал..."></textarea>
       </div>
     </div>
 
     <!-- STEP 4: Быстрые вопросы -->
     <div class="step" id="step-4">
-      <div class="step-label">Блок 4</div>
-      <div class="step-title">Быстрые вопросы</div>
-      <div class="step-desc">Отвечайте максимально быстро — первое, что приходит в голову.</div>
+      <div class="step-label" data-i18n="s4_label">Блок 4</div>
+      <div class="step-title" data-i18n="s4_title">Быстрые вопросы</div>
+      <div class="step-desc" data-i18n="s4_desc">Отвечайте максимально быстро — первое, что приходит в голову.</div>
 
       <div class="field">
-        <label>Что отнимает у вас время, не принося никакой пользы?</label>
+        <label data-i18n="q_time">Что отнимает у вас время, не принося никакой пользы?</label>
         <textarea id="time_waste"></textarea>
       </div>
       <div class="field">
-        <label>Чем, по вашим наблюдениям, выдающиеся в своём деле люди отличаются от остальных?</label>
+        <label data-i18n="q_outstanding">Чем, по вашим наблюдениям, выдающиеся в своём деле люди отличаются от остальных?</label>
         <textarea id="outstanding_people"></textarea>
       </div>
       <div class="field">
-        <label>Самый лучший совет, который вам когда-либо давали, и почему вы считаете его таковым.</label>
+        <label data-i18n="q_advice">Самый лучший совет, который вам когда-либо давали, и почему вы считаете его таковым.</label>
         <textarea id="best_advice"></textarea>
       </div>
       <div class="field">
-        <label>Каким вы видите наше сотрудничество? Чего вы ожидаете от наших сессий?</label>
+        <label data-i18n="q_expect">Каким вы видите наше сотрудничество? Чего вы ожидаете от наших сессий?</label>
         <textarea id="expectations"></textarea>
       </div>
     </div>
 
     <!-- STEP 5: Типология A/B -->
     <div class="step" id="step-5">
-      <div class="step-label">Блок 5</div>
-      <div class="step-title">Несколько вопросов о вас</div>
-      <div class="step-desc">Подчеркните ответ, который больше вам подходит.</div>
+      <div class="step-label" data-i18n="s5_label">Блок 5</div>
+      <div class="step-title" data-i18n="s5_title">Несколько вопросов о вас</div>
+      <div class="step-desc" data-i18n="s5_desc">Подчеркните ответ, который больше вам подходит.</div>
 
       <div class="ab-question">
-        <div class="ab-question-text">1. Как вы обычно восстанавливаете силы после тяжёлого дня?</div>
+        <div class="ab-question-text" data-i18n="ab1">1. Как вы обычно восстанавливаете силы после тяжёлого дня?</div>
         <div class="ab-options">
           <div class="ab-option" onclick="selectAB('ab_q1','A',this)">
             <div class="ab-option-letter">A</div>
-            <div class="ab-option-text">В компании друзей, на вечеринке или в чате.</div>
+            <div class="ab-option-text" data-i18n="ab1a">В компании друзей, на вечеринке или в чате.</div>
           </div>
           <div class="ab-option" onclick="selectAB('ab_q1','B',this)">
             <div class="ab-option-letter">B</div>
-            <div class="ab-option-text">В одиночестве, за книгой, фильмом или прогулкой.</div>
+            <div class="ab-option-text" data-i18n="ab1b">В одиночестве, за книгой, фильмом или прогулкой.</div>
           </div>
         </div>
       </div>
 
       <div class="ab-question">
-        <div class="ab-question-text">2. Как вы принимаете решения?</div>
+        <div class="ab-question-text" data-i18n="ab2">2. Как вы принимаете решения?</div>
         <div class="ab-options">
           <div class="ab-option" onclick="selectAB('ab_q2','A',this)">
             <div class="ab-option-letter">A</div>
-            <div class="ab-option-text">Руководствуюсь логикой, фактами и объективными данными.</div>
+            <div class="ab-option-text" data-i18n="ab2a">Руководствуюсь логикой, фактами и объективными данными.</div>
           </div>
           <div class="ab-option" onclick="selectAB('ab_q2','B',this)">
             <div class="ab-option-letter">B</div>
-            <div class="ab-option-text">Ориентируюсь на чувства, ценности и эмоции — свои и других.</div>
+            <div class="ab-option-text" data-i18n="ab2b">Ориентируюсь на чувства, ценности и эмоции — свои и других.</div>
           </div>
         </div>
       </div>
 
       <div class="ab-question">
-        <div class="ab-question-text">3. Как вы относитесь к планированию?</div>
+        <div class="ab-question-text" data-i18n="ab3">3. Как вы относитесь к планированию?</div>
         <div class="ab-options">
           <div class="ab-option" onclick="selectAB('ab_q3','A',this)">
             <div class="ab-option-letter">A</div>
-            <div class="ab-option-text">Люблю, когда всё расписано заранее и чётко организовано.</div>
+            <div class="ab-option-text" data-i18n="ab3a">Люблю, когда всё расписано заранее и чётко организовано.</div>
           </div>
           <div class="ab-option" onclick="selectAB('ab_q3','B',this)">
             <div class="ab-option-letter">B</div>
-            <div class="ab-option-text">Предпочитаю гибкость и спонтанность, часто действую по ситуации.</div>
+            <div class="ab-option-text" data-i18n="ab3b">Предпочитаю гибкость и спонтанность, часто действую по ситуации.</div>
           </div>
         </div>
       </div>
 
       <div class="ab-question">
-        <div class="ab-question-text">4. В компании новых людей вы скорее:</div>
+        <div class="ab-question-text" data-i18n="ab4">4. В компании новых людей вы скорее:</div>
         <div class="ab-options">
           <div class="ab-option" onclick="selectAB('ab_q4','A',this)">
             <div class="ab-option-letter">A</div>
-            <div class="ab-option-text">Быстро завожу разговор, знакомлюсь со всеми.</div>
+            <div class="ab-option-text" data-i18n="ab4a">Быстро завожу разговор, знакомлюсь со всеми.</div>
           </div>
           <div class="ab-option" onclick="selectAB('ab_q4','B',this)">
             <div class="ab-option-letter">B</div>
-            <div class="ab-option-text">Сначала наблюдаю, присматриваюсь, говорю меньше.</div>
+            <div class="ab-option-text" data-i18n="ab4b">Сначала наблюдаю, присматриваюсь, говорю меньше.</div>
           </div>
         </div>
       </div>
 
       <div class="ab-question">
-        <div class="ab-question-text">5. Если работа или проект затянулся, вы:</div>
+        <div class="ab-question-text" data-i18n="ab5">5. Если работа или проект затянулся, вы:</div>
         <div class="ab-options">
           <div class="ab-option" onclick="selectAB('ab_q5','A',this)">
             <div class="ab-option-letter">A</div>
-            <div class="ab-option-text">Довожу до конца любой ценой, даже если устал.</div>
+            <div class="ab-option-text" data-i18n="ab5a">Довожу до конца любой ценой, даже если устал.</div>
           </div>
           <div class="ab-option" onclick="selectAB('ab_q5','B',this)">
             <div class="ab-option-letter">B</div>
-            <div class="ab-option-text">Могу переключиться на что-то другое, чтобы не выгореть.</div>
+            <div class="ab-option-text" data-i18n="ab5b">Могу переключиться на что-то другое, чтобы не выгореть.</div>
           </div>
         </div>
       </div>
 
       <div class="ab-question">
-        <div class="ab-question-text">6. Что для вас важнее в общении?</div>
+        <div class="ab-question-text" data-i18n="ab6">6. Что для вас важнее в общении?</div>
         <div class="ab-options">
           <div class="ab-option" onclick="selectAB('ab_q6','A',this)">
             <div class="ab-option-letter">A</div>
-            <div class="ab-option-text">Содержание и смысл сказанного.</div>
+            <div class="ab-option-text" data-i18n="ab6a">Содержание и смысл сказанного.</div>
           </div>
           <div class="ab-option" onclick="selectAB('ab_q6','B',this)">
             <div class="ab-option-letter">B</div>
-            <div class="ab-option-text">Атмосфера, настроение, эмоциональная связь.</div>
+            <div class="ab-option-text" data-i18n="ab6b">Атмосфера, настроение, эмоциональная связь.</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="nav">
-      <button class="btn btn-ghost" id="btn-back" onclick="prevStep()" style="display:none">← Назад</button>
-      <button class="btn btn-teal" id="btn-next" onclick="nextStep()">Далее →</button>
+      <button class="btn btn-ghost" id="btn-back" onclick="prevStep()" style="display:none" data-i18n="btn_back">← Назад</button>
+      <button class="btn btn-teal" id="btn-next" onclick="nextStep()" data-i18n="btn_next">Далее →</button>
     </div>
 
   </div>
@@ -399,9 +399,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
   <div id="screen-thanks" style="display:none">
     <div class="welcome">
       <div class="welcome-icon">✦</div>
-      <div class="welcome-title">Спасибо за искренность</div>
-      <div class="welcome-text">Ваши ответы получены. Они помогут сделать нашу работу вместе максимально точной.<br><br>До встречи.</div>
-      <div style="font-size:13px;color:var(--ink-faint);font-style:italic">Association de l'Intelligence Narrative · А. Аветисов</div>
+      <div class="welcome-title" data-i18n="thanks_title">Спасибо за искренность</div>
+      <div class="welcome-text" data-i18n="thanks_text">Ваши ответы получены. Они помогут сделать нашу работу вместе максимально точной.<br><br>До встречи.</div>
+      <div style="font-size:13px;color:var(--ink-faint);font-style:italic" data-i18n="thanks_sign">Association de l'Intelligence Narrative · А. Аветисов</div>
     </div>
   </div>
 
@@ -410,6 +410,316 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 <script>
 const API = 'https://adin-ni-backend-production.up.railway.app/api';
 const TOTAL_STEPS = 6; // 0..5
+
+// ── ЯЗЫК ─────────────────────────────────────────────────────────────────────
+// Язык фиксируется при выдаче кода (дашборд) и приходит из /test/verify-code —
+// участник его не выбирает (та же схема, что в НИ-тесте). Русский текст живёт
+// в самой разметке; для 'en' элементы с data-i18n переписываются из I18N.en.
+// Тексты вопросов на EN дословно совпадают с подписями в письме фасилитатору
+// (adin-ni-backend, services/email.js, PN_LABELS_BY_LANG).
+let LANG = 'ru';
+const I18N = {
+  ru: {
+    "btn_enter": "Войти →",
+    "btn_next": "Далее →",
+    "btn_checking": "Проверяем…",
+    "btn_submit": "Отправить ✓",
+    "btn_sending": "Отправляем...",
+    "step_of": "Шаг {n} из {total}",
+    "select_ph": "— выберите —",
+    "consent_alert": "Необходимо согласие на обработку данных для продолжения.",
+    "submit_error": "Ошибка отправки: ",
+    "try_again": "попробуйте снова",
+    "conn_error": "Ошибка соединения. Проверьте интернет и попробуйте снова."
+},
+  en: {
+    "login_sub": "Enter the access code from your invitation email",
+    "login_error": "Code not found. Check the email and try again.",
+    "btn_enter": "Enter →",
+    "link_error": "The link is invalid or has expired.",
+    "btn_back": "← Back",
+    "btn_next": "Next →",
+    "lbl_country": "Country",
+    "lbl_industry": "Field of activity",
+    "lbl_gender": "Gender",
+    "lbl_age": "Age",
+    "lbl_marital": "Marital status",
+    "lbl_children": "Do you have children?",
+    "lbl_education": "Education level",
+    "lbl_edu_field": "Field of education",
+    "lbl_lang_native": "Native language",
+    "lbl_lang_add": "Additional language",
+    "title": "Profils Narratifs — Questionnaire about you",
+    "s0_label": "Welcome",
+    "s0_title": "Good to see you!",
+    "s0_desc": "Before we begin, tell us a little about yourself — it takes 1 minute. The data is anonymous and used only for aggregated statistics.",
+    "consent": "I consent to the processing of my answers and the data I provide for research purposes by Association de l'Intelligence Narrative® in accordance with GDPR. See the Privacy Policy for details. I know that I can withdraw my consent and request deletion.",
+    "s1_label": "Block 1",
+    "s1_title": "Results and obstacles",
+    "s1_desc": "Write the first thing that comes to mind — that is what will be most valuable.",
+    "q_results": "Four results you want to achieve in the very near future:",
+    "q_obstacles": "What in your environment prevents you from achieving these results?",
+    "s2_label": "Block 2",
+    "s2_title": "Skills and strengths",
+    "s2_desc": "Answer honestly — there are no right answers here.",
+    "q_skills": "What skills or knowledge do you lack to achieve these results?",
+    "q_strengths": "What are your personal and professional strengths? What sets you apart from others? Recall a moment when a colleague or someone close to you said something about you that surprised or touched you.",
+    "s3_label": "Block 3",
+    "s3_title": "Values and feeling",
+    "q_values": "What is truly important and valuable to you in this world?",
+    "q_feeling": "Describe in one or two sentences how you feel in the company right now — not an analysis, a feeling.",
+    "s4_label": "Block 4",
+    "s4_title": "Quick questions",
+    "s4_desc": "Answer as quickly as possible — the first thing that comes to mind.",
+    "q_time": "What takes up your time without bringing any benefit?",
+    "q_outstanding": "In your observation, what sets people who are outstanding in their field apart from the rest?",
+    "q_advice": "The best advice you have ever been given, and why you consider it the best.",
+    "q_expect": "How do you see our collaboration? What do you expect from our sessions?",
+    "s5_label": "Block 5",
+    "s5_title": "A few questions about you",
+    "s5_desc": "Choose the answer that suits you better.",
+    "ab1": "1. How do you usually recharge after a hard day?",
+    "ab1a": "With friends, at a party or in a chat.",
+    "ab1b": "Alone, with a book, a film or a walk.",
+    "ab2": "2. How do you make decisions?",
+    "ab2a": "I am guided by logic, facts and objective data.",
+    "ab2b": "I go by feelings, values and emotions — my own and others’.",
+    "ab3": "3. How do you feel about planning?",
+    "ab3a": "I like everything planned in advance and clearly organised.",
+    "ab3b": "I prefer flexibility and spontaneity and often act as the situation unfolds.",
+    "ab4": "4. Among new people, you are more likely to:",
+    "ab4a": "Quickly strike up a conversation and get to know everyone.",
+    "ab4b": "Observe first, take a closer look, speak less.",
+    "ab5": "5. If a job or project drags on, you:",
+    "ab5a": "See it through at any cost, even if tired.",
+    "ab5b": "Can switch to something else so as not to burn out.",
+    "ab6": "6. What matters more to you in communication?",
+    "ab6a": "The content and meaning of what is said.",
+    "ab6b": "The atmosphere, the mood, the emotional connection.",
+    "thanks_title": "Thank you for your candour",
+    "thanks_text": "Your answers have been received. They will help make our work together as precise as possible.<br><br>See you soon.",
+    "thanks_sign": "Association de l'Intelligence Narrative · A. Avetisov",
+    "ph_feeling": "For example: I feel tired but I see potential...",
+    "btn_checking": "Checking…",
+    "btn_submit": "Submit ✓",
+    "btn_sending": "Sending...",
+    "step_of": "Step {n} of {total}",
+    "select_ph": "— select —",
+    "consent_alert": "Consent to data processing is required to continue.",
+    "submit_error": "Submission error: ",
+    "try_again": "please try again",
+    "conn_error": "Connection error. Check your internet connection and try again."
+},
+};
+const T = () => I18N[LANG];
+
+// Варианты демографической анкеты на английском — те же, что в НИ-тесте
+// и в форме «Нарративный статус», чтобы демография разных инструментов сравнивалась.
+const DEMO_EN = {
+  "p-country": {
+    "groups": {
+      "CIS": [
+        "Russia",
+        "Armenia",
+        "Kazakhstan",
+        "Belarus",
+        "Ukraine",
+        "Uzbekistan",
+        "Azerbaijan",
+        "Moldova",
+        "Kyrgyzstan",
+        "Tajikistan",
+        "Turkmenistan"
+      ],
+      "Europe (non-EU)": [
+        "Georgia",
+        "Switzerland",
+        "United Kingdom",
+        "Norway",
+        "Iceland",
+        "Liechtenstein",
+        "Serbia",
+        "Montenegro"
+      ],
+      "European Union": [
+        "Austria",
+        "Belgium",
+        "Bulgaria",
+        "Hungary",
+        "Germany",
+        "Greece",
+        "Denmark",
+        "Ireland",
+        "Spain",
+        "Italy",
+        "Cyprus",
+        "Latvia",
+        "Lithuania",
+        "Luxembourg",
+        "Malta",
+        "Netherlands",
+        "Poland",
+        "Portugal",
+        "Romania",
+        "Slovakia",
+        "Slovenia",
+        "Finland",
+        "France",
+        "Croatia",
+        "Czechia",
+        "Sweden",
+        "Estonia"
+      ],
+      "Other regions": [
+        "Argentina",
+        "Bahrain",
+        "Brazil",
+        "Israel",
+        "Canada",
+        "China",
+        "Mexico",
+        "UAE",
+        "USA",
+        "Turkey"
+      ]
+    },
+    "other": "Other"
+  },
+  "p-industry": {
+    "options": [
+      "Management",
+      "Education / Science",
+      "Consulting / Coaching",
+      "Entrepreneurship",
+      "HR / Organizational Development",
+      "Medicine / Healthcare",
+      "Law / Finance",
+      "Creative professions",
+      "Other"
+    ]
+  },
+  "p-gender": {
+    "options": [
+      "Male",
+      "Female",
+      "Prefer not to say"
+    ]
+  },
+  "p-age": {
+    "options": [
+      "Under 25",
+      "25–34",
+      "35–44",
+      "45–54",
+      "55–64",
+      "65 or older",
+      "Prefer not to say"
+    ]
+  },
+  "p-marital": {
+    "options": [
+      "Not in a relationship",
+      "In a relationship",
+      "Married",
+      "Divorced",
+      "Widowed",
+      "Prefer not to answer"
+    ]
+  },
+  "p-children": {
+    "options": [
+      "No",
+      "Yes"
+    ]
+  },
+  "p-education": {
+    "options": [
+      "Secondary",
+      "Vocational",
+      "Bachelor's degree",
+      "Master's degree",
+      "Doctoral degree (PhD, MD)",
+      "Other"
+    ]
+  },
+  "p-edu-field": {
+    "options": [
+      "Engineering & Technology",
+      "Natural Sciences",
+      "Social Sciences",
+      "Humanities",
+      "Economics & Business",
+      "Art & Design",
+      "Medicine",
+      "Military",
+      "Other"
+    ]
+  },
+  "p-lang-native": {
+    "options": [
+      "Russian",
+      "French",
+      "Georgian",
+      "Kazakh",
+      "English",
+      "Armenian",
+      "Arabic",
+      "Spanish",
+      "German",
+      "Chinese",
+      "Other"
+    ]
+  },
+  "p-lang-add": {
+    "options": [
+      "Russian",
+      "French",
+      "Georgian",
+      "Kazakh",
+      "English",
+      "Armenian",
+      "Arabic",
+      "Spanish",
+      "German",
+      "Chinese",
+      "Other",
+      "None"
+    ]
+  }
+};
+const DEMO_RU_HTML = {};
+function rebuildDemoSelects(lang) {
+  Object.keys(DEMO_EN).forEach(id => {
+    const sel = document.getElementById(id); if (!sel) return;
+    if (!DEMO_RU_HTML[id]) DEMO_RU_HTML[id] = sel.innerHTML; // русский вариант — из разметки
+    if (lang !== 'en') { sel.innerHTML = DEMO_RU_HTML[id]; return; }
+    const cfg = DEMO_EN[id]; sel.innerHTML = '';
+    const ph = document.createElement('option'); ph.value = ''; ph.textContent = I18N.en.select_ph; sel.appendChild(ph);
+    if (cfg.groups) {
+      Object.entries(cfg.groups).forEach(([g, opts]) => { const og = document.createElement('optgroup'); og.label = g;
+        opts.forEach(o => { const op = document.createElement('option'); op.textContent = o; og.appendChild(op); }); sel.appendChild(og); });
+      if (cfg.other) { const op = document.createElement('option'); op.textContent = cfg.other; sel.appendChild(op); }
+    } else { cfg.options.forEach(o => { const op = document.createElement('option'); op.textContent = o; sel.appendChild(op); }); }
+  });
+}
+
+function applyLanguage(lang) {
+  LANG = (lang === 'en') ? 'en' : 'ru';
+  document.documentElement.lang = LANG;
+  if (LANG === 'en') {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = I18N.en[el.getAttribute('data-i18n')];
+      if (v == null) return;
+      if (v.indexOf('<br') >= 0) el.innerHTML = v; else el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const v = I18N.en[el.getAttribute('data-i18n-ph')]; if (v != null) el.placeholder = v;
+    });
+    document.title = I18N.en.title;
+  }
+  rebuildDemoSelects(LANG);
+}
+
 let currentStep = 0;
 let code = null;
 let abAnswers = {};
@@ -425,7 +735,7 @@ async function verifyCode() {
     return;
   }
   const btn = document.getElementById('btn-enter');
-  btn.disabled = true; btn.textContent = 'Проверяем…';
+  btn.disabled = true; btn.textContent = T().btn_checking;
   document.getElementById('login-error').style.display = 'none';
   try {
     const r = await fetch(API + '/test/verify-code', {
@@ -436,15 +746,16 @@ async function verifyCode() {
     const data = await r.json();
     if (data.valid) {
       code = c;
+      applyLanguage(data.language || 'ru');
       showScreen('form');
       updateProgress();
     } else {
       document.getElementById('login-error').style.display = 'block';
-      btn.disabled = false; btn.textContent = 'Войти →';
+      btn.disabled = false; btn.textContent = T().btn_enter;
     }
   } catch(e) {
     document.getElementById('login-error').style.display = 'block';
-    btn.disabled = false; btn.textContent = 'Войти →';
+    btn.disabled = false; btn.textContent = T().btn_enter;
   }
 }
 
@@ -475,10 +786,10 @@ function showError(msg) {
 function updateProgress() {
   const pct = Math.round((currentStep / TOTAL_STEPS) * 100);
   document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('step-label-text').textContent = 'Шаг ' + (currentStep + 1) + ' из ' + TOTAL_STEPS;
+  document.getElementById('step-label-text').textContent = T().step_of.replace('{n}', currentStep + 1).replace('{total}', TOTAL_STEPS);
   document.getElementById('step-pct-text').textContent = pct + '%';
   document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
-  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS - 1 ? 'Отправить ✓' : 'Далее →';
+  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS - 1 ? T().btn_submit : T().btn_next;
 }
 
 function showStep(n) {
@@ -515,7 +826,7 @@ function getVal(id) {
 async function submitForm() {
   const consentEl = document.getElementById('p-consent');
   if (!consentEl || !consentEl.checked) {
-    alert('Необходимо согласие на обработку данных для продолжения.');
+    alert(T().consent_alert);
     showStep(0);
     return;
   }
@@ -548,7 +859,7 @@ async function submitForm() {
   };
 
   document.getElementById('btn-next').disabled = true;
-  document.getElementById('btn-next').textContent = 'Отправляем...';
+  document.getElementById('btn-next').textContent = T().btn_sending;
 
   try {
     const r = await fetch(API + '/v2/submit/questionnaire', {
@@ -560,14 +871,14 @@ async function submitForm() {
     if (r.ok && d.success) {
       showScreen('thanks');
     } else {
-      alert('Ошибка отправки: ' + (d.error || 'попробуйте снова'));
+      alert(T().submit_error + (d.error || T().try_again));
       document.getElementById('btn-next').disabled = false;
-      document.getElementById('btn-next').textContent = 'Отправить ✓';
+      document.getElementById('btn-next').textContent = T().btn_submit;
     }
   } catch(e) {
-    alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+    alert(T().conn_error);
     document.getElementById('btn-next').disabled = false;
-    document.getElementById('btn-next').textContent = 'Отправить ✓';
+    document.getElementById('btn-next').textContent = T().btn_submit;
   }
 }
 </script>
