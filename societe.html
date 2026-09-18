@@ -105,6 +105,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
         <div class="field"><label>2.</label><input type="text" id="benchmark_2"></div>
         <div class="field"><label>3.</label><input type="text" id="benchmark_3"></div>
       </div>
+
+      <div class="fields-group">
+        <div class="fields-group-title" data-i18n="q_dream_obstacle">Что мешает вашей компании стать такой, о какой вы мечтаете?</div>
+        <div class="field"><textarea id="dream_obstacle" rows="4"></textarea></div>
+      </div>
     </div>
 
     <!-- STEP 1: Коллеги и условия -->
@@ -192,6 +197,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
+        <div class="fields-group-title" data-i18n="q_agency_change">Из того, что вы хотели бы изменить в компании — что из этого вы могли бы сделать сами, не дожидаясь решения сверху?</div>
+        <div class="field"><textarea id="agency_change" rows="4"></textarea></div>
+      </div>
+
+      <div class="fields-group">
         <div class="fields-group-title" data-i18n="q_expect_sub">Четыре качества, которые вы ожидаете от своих подчинённых или членов команды:</div>
         <div class="field"><label>1.</label><input type="text" id="expect_sub_1"></div>
         <div class="field"><label>2.</label><input type="text" id="expect_sub_2"></div>
@@ -260,6 +270,7 @@ const I18N = {
     "s0_desc": "Imagine the ideal company — one where you work with full commitment.",
     "q_dream": "Four words or expressions that describe your dream company:",
     "q_bench": "Three companies (not necessarily in your industry) that you consider exemplary, and why:",
+    "q_dream_obstacle": "What prevents your company from becoming the one you dream of?",
     "s1_label": "Block 2",
     "s1_title": "Colleagues and working conditions",
     "q_colleague": "Four qualities your ideal colleagues should have:",
@@ -276,6 +287,7 @@ const I18N = {
     "s4_label": "Block 5",
     "s4_title": "Changes and expectations",
     "q_changes": "Five changes you would like to see in your company:",
+    "q_agency_change": "Of the things you would like to change in the company — which of them could you do yourself, without waiting for a decision from above?",
     "q_expect_sub": "Four qualities you expect from your subordinates or team members:",
     "consent": "I consent to the processing of my answers for research purposes by Association de l'Intelligence Narrative® in accordance with GDPR. See the Privacy Policy for details. I know that I can withdraw my consent and request deletion.",
     "thanks_title": "Thank you",
@@ -401,6 +413,7 @@ async function submitForm() {
     dream_word_1: getVal('dream_word_1'), dream_word_2: getVal('dream_word_2'),
     dream_word_3: getVal('dream_word_3'), dream_word_4: getVal('dream_word_4'),
     benchmark_1: getVal('benchmark_1'), benchmark_2: getVal('benchmark_2'), benchmark_3: getVal('benchmark_3'),
+    dream_obstacle: getVal('dream_obstacle'),
     colleague_q_1: getVal('colleague_q_1'), colleague_q_2: getVal('colleague_q_2'),
     colleague_q_3: getVal('colleague_q_3'), colleague_q_4: getVal('colleague_q_4'),
     condition_1: getVal('condition_1'), condition_2: getVal('condition_2'), condition_3: getVal('condition_3'),
@@ -413,6 +426,7 @@ async function submitForm() {
     decision_1: getVal('decision_1'), decision_2: getVal('decision_2'), decision_3: getVal('decision_3'),
     change_1: getVal('change_1'), change_2: getVal('change_2'), change_3: getVal('change_3'),
     change_4: getVal('change_4'), change_5: getVal('change_5'),
+    agency_change: getVal('agency_change'),
     expect_sub_1: getVal('expect_sub_1'), expect_sub_2: getVal('expect_sub_2'),
     expect_sub_3: getVal('expect_sub_3'), expect_sub_4: getVal('expect_sub_4')
   };
