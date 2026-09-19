@@ -1,0 +1,10 @@
+# Netlify: статика + прокси к бэкенду на Railway.
+# Формы зовут /api на своём домене; Netlify пересылает запрос на Railway
+# из своей сети (Railway и Cloudflare из части сетей РФ недоступны/задушены).
+# Cloudflare Pages и GitHub Pages этот файл игнорируют.
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://adin-ni-backend-production.up.railway.app/api/:splat"
+  status = 200
+  force = true
