@@ -370,7 +370,7 @@ async function verifyCode() {
     const r = await fetch(API + '/test/verify-code', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({code: c}),
+      body: JSON.stringify({code: c, test_type: 'profils_societe'}),
     });
     const data = await r.json();
     if (data.valid) {
@@ -380,7 +380,12 @@ async function verifyCode() {
       loadDraft();
       updateProgress();
     } else {
-      document.getElementById('login-error').style.display = 'block';
+      const errEl = document.getElementById('login-error');
+      const ru = { already_used: 'Этот код уже использован — ответы по нему сданы.', wrong_test: 'Этот код выдан для другого опросника. Проверьте письмо.', expired: 'Срок действия кода истёк. Обратитесь к организатору.' };
+      const en = { already_used: 'This code has already been used — the answers were submitted.', wrong_test: 'This code was issued for a different questionnaire. Check your email.', expired: 'This code has expired. Contact the organiser.' };
+      const msg = (LANG === 'en' ? en : ru)[data.reason];
+      errEl.textContent = msg || T().login_error || 'Код не найден. Проверьте письмо и попробуйте снова.';
+      errEl.style.display = 'block';
       btn.disabled = false; btn.textContent = T().btn_enter;
     }
   } catch(e) {
