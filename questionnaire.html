@@ -722,6 +722,32 @@ function applyLanguage(lang) {
 
 let currentStep = 0;
 let code = null;
+
+// Черновик полей формы на устройстве (по коду доступа). Если отправка сорвалась
+// (перехват запроса встроенным браузером, потеря сети) или вкладку закрыли,
+// повторный вход с тем же кодом подставляет введённое. После успешной
+// отправки черновик стирается. Галочка согласия не сохраняется намеренно.
+const DRAFT_PREFIX = 'adin_profils_q_draft_';
+function draftFields() { return document.querySelectorAll('#screen-form input, #screen-form textarea, #screen-form select'); }
+function saveDraft() {
+  try {
+    if (!code) return;
+    const d = {};
+    draftFields().forEach(el => { if (el.id && el.type !== 'checkbox') d[el.id] = el.value; });
+    localStorage.setItem(DRAFT_PREFIX + code, JSON.stringify(d));
+  } catch (e) {}
+}
+function loadDraft() {
+  try {
+    if (!code) return;
+    const s = localStorage.getItem(DRAFT_PREFIX + code); if (!s) return;
+    const d = JSON.parse(s);
+    draftFields().forEach(el => { if (el.id && el.type !== 'checkbox' && d[el.id] != null && !el.value) el.value = d[el.id]; });
+  } catch (e) {}
+}
+function clearDraft() { try { if (code) localStorage.removeItem(DRAFT_PREFIX + code); } catch (e) {} }
+document.addEventListener('input',  e => { if (e.target.closest && e.target.closest('#screen-form')) saveDraft(); });
+document.addEventListener('change', e => { if (e.target.closest && e.target.closest('#screen-form')) saveDraft(); });
 let abAnswers = {};
 
 window.onload = () => {
@@ -748,6 +774,7 @@ async function verifyCode() {
       code = c;
       applyLanguage(data.language || 'ru');
       showScreen('form');
+      loadDraft();
       updateProgress();
     } else {
       document.getElementById('login-error').style.display = 'block';
@@ -869,6 +896,7 @@ async function submitForm() {
     });
     const d = await r.json();
     if (r.ok && d.success) {
+      clearDraft();
       showScreen('thanks');
     } else {
       alert(T().submit_error + (d.error || T().try_again));
