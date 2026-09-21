@@ -770,6 +770,9 @@ async function verifyCode() {
       body: JSON.stringify({code: c, test_type: 'profils_questionnaire'}),
     });
     const data = await r.json();
+    // Код перенесён на другой инстанс (например, RU-сервер): уходим туда
+    // с этим же кодом — письмо со старой ссылкой остаётся рабочим.
+    if (!data.valid && data.reason === 'moved' && data.redirect) { location.replace(data.redirect); return; }
     if (data.valid) {
       code = c;
       applyLanguage(data.language || 'ru');
@@ -914,6 +917,21 @@ async function submitForm() {
     document.getElementById('btn-next').textContent = T().btn_submit;
   }
 }
+
+// Код из адреса страницы (?code=ADIN-XXXX): так приходят участники, которых
+// перебросил другой инстанс, или по прямой ссылке. Подставляем в поле, убираем
+// из адресной строки и проверяем сами — остаётся нажать «Начать».
+(function () {
+  try {
+    const c = new URLSearchParams(location.search).get('code');
+    if (!c) return;
+    const inp = document.getElementById('code-input');
+    if (!inp) return;
+    inp.value = c.trim().toUpperCase();
+    history.replaceState(null, '', location.pathname);
+    window.addEventListener('load', () => setTimeout(verifyCode, 300));
+  } catch (e) { /* без кода в адресе — обычный вход */ }
+})();
 </script>
 </body>
 </html>
