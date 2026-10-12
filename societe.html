@@ -31,6 +31,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal)}
 .field textarea{resize:vertical;min-height:100px;line-height:1.6}
 .fields-group{background:var(--white);border-radius:var(--r);padding:20px;margin-bottom:16px;border:1.5px solid var(--cream-d)}
+.fields-group-hint{font-size:12px;color:var(--ink-faint);margin:-10px 0 14px;line-height:1.5}
 .fields-group-title{font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:16px;line-height:1.5}
 .nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:none;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit}
@@ -92,7 +93,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       <div class="step-desc" data-i18n="s0_desc">Представьте идеальную компанию — такую, в которой вы работаете с полной отдачей.</div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_dream">Четыре слова или выражения, которые характеризуют вашу компанию-мечту:</div>
+        <div class="fields-group-title" data-i18n="q_dream">В четырёх словах: какой вы хотели бы видеть компанию (например: в первой тройке рынка, инновационной, стабильной…)</div>
         <div class="field"><label>1.</label><input type="text" id="dream_word_1"></div>
         <div class="field"><label>2.</label><input type="text" id="dream_word_2"></div>
         <div class="field"><label>3.</label><input type="text" id="dream_word_3"></div>
@@ -100,21 +101,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_bench">Три компании (не обязательно в вашей отрасли), которые кажутся вам образцовыми, и почему:</div>
-        <div class="field"><label>1.</label><input type="text" id="benchmark_1" data-i18n-ph="ph_bench" placeholder="Название компании и причина"></div>
+        <div class="fields-group-title" data-i18n="q_bench">Какие компании (из других сфер деятельности и стран) по образу, ощущениям или эмоциям ближе всего к вашему представлению о компании мечты, и почему</div>
+        <div class="field"><label>1.</label><input type="text" id="benchmark_1" data-i18n-ph="ph_bench" placeholder="Название компании и почему"></div>
         <div class="field"><label>2.</label><input type="text" id="benchmark_2"></div>
         <div class="field"><label>3.</label><input type="text" id="benchmark_3"></div>
       </div>
-
     </div>
 
     <!-- STEP 1: Коллеги и условия -->
     <div class="step" id="step-1">
       <div class="step-label" data-i18n="s1_label">Блок 2</div>
-      <div class="step-title" data-i18n="s1_title">Коллеги и условия работы</div>
+      <div class="step-title" data-i18n="s1_title">Коллеги и условия</div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_colleague">Четыре качества, которыми должны обладать ваши идеальные коллеги:</div>
+        <div class="fields-group-title" data-i18n="q_colleague">Четыре качества, которые вы цените в коллегах и в отношениях с ними</div>
         <div class="field"><label>1.</label><input type="text" id="colleague_q_1"></div>
         <div class="field"><label>2.</label><input type="text" id="colleague_q_2"></div>
         <div class="field"><label>3.</label><input type="text" id="colleague_q_3"></div>
@@ -122,48 +122,56 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_conditions">Три условия, необходимые для того, чтобы вы работали в полную силу:</div>
-        <div class="field"><label>1.</label><input type="text" id="condition_1"></div>
+        <div class="fields-group-title" data-i18n="q_conditions">Три условия, при которых ваша работа будет максимально результативной, в порядке приоритета (первое самое важное)</div>
+        <div class="field"><label data-i18n="lbl_first">1 — самое важное</label><input type="text" id="condition_1"></div>
         <div class="field"><label>2.</label><input type="text" id="condition_2"></div>
         <div class="field"><label>3.</label><input type="text" id="condition_3"></div>
       </div>
     </div>
 
-    <!-- STEP 2: Управление -->
+    <!-- STEP 2: Управление и руководитель -->
     <div class="step" id="step-2">
       <div class="step-label" data-i18n="s2_label">Блок 3</div>
-      <div class="step-title" data-i18n="s2_title">Стиль управления</div>
+      <div class="step-title" data-i18n="s2_title">Управление и руководитель</div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_mgmt">Три характеристики идеального стиля управления для вас лично:</div>
-        <div class="field"><label>1.</label><input type="text" id="mgmt_style_1"></div>
-        <div class="field"><label>2.</label><input type="text" id="mgmt_style_2"></div>
-        <div class="field"><label>3.</label><input type="text" id="mgmt_style_3"></div>
+        <div class="fields-group-title" data-i18n="q_mgmt_form">Какая форма управления персоналом была бы наиболее эффективной (например: постоянный контроль, полная автономия, регулярная обратная связь…)</div>
+        <div class="field"><label>1.</label><input type="text" id="mgmt_form_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="mgmt_form_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="mgmt_form_3"></div>
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_leader">Если бы вы были руководителем — четыре качества, которые вы бы хотели развивать в себе:</div>
-        <div class="field"><label>1.</label><input type="text" id="leader_q_1"></div>
-        <div class="field"><label>2.</label><input type="text" id="leader_q_2"></div>
-        <div class="field"><label>3.</label><input type="text" id="leader_q_3"></div>
-        <div class="field"><label>4.</label><input type="text" id="leader_q_4"></div>
+        <div class="fields-group-title" data-i18n="q_leader_valued">Вы как руководитель: какие ваши личные качества подчинённые должны ценить в первую очередь</div>
+        <div class="fields-group-hint" data-i18n="hint_leader_valued">Если у вас нет подчинённых, пропустите этот вопрос.</div>
+        <div class="field"><label>1.</label><input type="text" id="leader_valued_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="leader_valued_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="leader_valued_3"></div>
+        <div class="field"><label>4.</label><input type="text" id="leader_valued_4"></div>
       </div>
-    </div>
-
-    <!-- STEP 3: Роли и решения -->
-    <div class="step" id="step-3">
-      <div class="step-label" data-i18n="s3_label">Блок 4</div>
-      <div class="step-title" data-i18n="s3_title">Роли и принятие решений</div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_ceo">Три роли, которые должен в первую очередь выполнять генеральный директор вашей компании:</div>
+        <div class="fields-group-title" data-i18n="q_ceo">Три важные роли руководителя компании</div>
         <div class="field"><label>1.</label><input type="text" id="ceo_role_1"></div>
         <div class="field"><label>2.</label><input type="text" id="ceo_role_2"></div>
         <div class="field"><label>3.</label><input type="text" id="ceo_role_3"></div>
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_now">Четыре слова или выражения, которые характеризуют вашу нынешнюю компанию:</div>
+        <div class="fields-group-title" data-i18n="q_ceo_quality">Три ценных личных качества руководителя компании</div>
+        <div class="field"><label>1.</label><input type="text" id="ceo_quality_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="ceo_quality_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="ceo_quality_3"></div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Компания сейчас -->
+    <div class="step" id="step-3">
+      <div class="step-label" data-i18n="s3_label">Блок 4</div>
+      <div class="step-title" data-i18n="s3_title">Компания сейчас</div>
+
+      <div class="fields-group">
+        <div class="fields-group-title" data-i18n="q_now">В 3–4 словах: какая компания сейчас</div>
         <div class="field"><label>1.</label><input type="text" id="now_word_1"></div>
         <div class="field"><label>2.</label><input type="text" id="now_word_2"></div>
         <div class="field"><label>3.</label><input type="text" id="now_word_3"></div>
@@ -176,10 +184,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_decisions">Три решения, принятые в вашей компании за последнее время, которые вас порадовали:</div>
-        <div class="field"><label>1.</label><input type="text" id="decision_1"></div>
-        <div class="field"><label>2.</label><input type="text" id="decision_2"></div>
-        <div class="field"><label>3.</label><input type="text" id="decision_3"></div>
+        <div class="fields-group-title" data-i18n="q_decisions_needed">Три решения, которые нужно принять, чтобы компания соответствовала компании вашей мечты</div>
+        <div class="field"><label>1.</label><input type="text" id="decision_needed_1"></div>
+        <div class="field"><label>2.</label><input type="text" id="decision_needed_2"></div>
+        <div class="field"><label>3.</label><input type="text" id="decision_needed_3"></div>
       </div>
     </div>
 
@@ -189,7 +197,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       <div class="step-title" data-i18n="s4_title">Изменения и ожидания</div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_changes">Пять изменений, которые вам хотелось бы видеть в своей компании:</div>
+        <div class="fields-group-title" data-i18n="q_changes">Что должно измениться в компании в первую очередь (до пяти пунктов)</div>
         <div class="field"><label>1.</label><input type="text" id="change_1"></div>
         <div class="field"><label>2.</label><input type="text" id="change_2"></div>
         <div class="field"><label>3.</label><input type="text" id="change_3"></div>
@@ -198,12 +206,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_agency_change">Какое из этих пяти изменений вы могли бы начать в своей зоне ответственности уже в ближайший месяц — и с чего бы начали?</div>
+        <div class="fields-group-title" data-i18n="q_agency_change">Какое из этих изменений вы могли бы начать в своей зоне ответственности уже в ближайший месяц, и с чего бы начали?</div>
         <div class="field"><textarea id="agency_change" rows="4"></textarea></div>
       </div>
 
       <div class="fields-group">
-        <div class="fields-group-title" data-i18n="q_expect_sub">Четыре качества, которые вы ожидаете от своих подчинённых или членов команды:</div>
+        <div class="fields-group-title" data-i18n="q_expect_sub">Что вы ожидаете от подчинённых или членов команды (четыре качества)</div>
         <div class="field"><label>1.</label><input type="text" id="expect_sub_1"></div>
         <div class="field"><label>2.</label><input type="text" id="expect_sub_2"></div>
         <div class="field"><label>3.</label><input type="text" id="expect_sub_3"></div>
@@ -236,13 +244,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;ba
 <script>
 const API = '/api'; // тот же домен: Pages Function functions/api/[[path]].js проксирует на Railway (Railway и *.pages.dev недоступны из части сетей РФ)
 const TOTAL_STEPS = 5;
+const FORM_VERSION = 'societe-hybrid-2026-10';
 
 // ── ЯЗЫК ─────────────────────────────────────────────────────────────────────
 // Язык фиксируется при выдаче кода (дашборд) и приходит из /test/verify-code —
 // участник его не выбирает (та же схема, что в НИ-тесте). Русский текст живёт
 // в самой разметке; для 'en' элементы с data-i18n переписываются из I18N.en.
-// Тексты вопросов на EN дословно совпадают с подписями в письме фасилитатору
-// (adin-ni-backend, services/email.js, PN_LABELS_BY_LANG).
+// Гибридная версия анкеты (societe-hybrid-2026-10). Тексты вопросов совпадают
+// с подписями в дашборде (PN_LABELS) и в промпте анализа (adin-ni-backend,
+// routes/societe.js, QUESTIONS). Смысл вопроса изменился — ключ новый.
 let LANG = 'ru';
 const I18N = {
   ru: {
@@ -269,27 +279,30 @@ const I18N = {
     "s0_label": "Block 1",
     "s0_title": "Dream company",
     "s0_desc": "Imagine the ideal company — one where you work with full commitment.",
-    "q_dream": "Four words or expressions that describe your dream company:",
-    "q_bench": "Three companies (not necessarily in your industry) that you consider exemplary, and why:",
-    "q_dream_obstacle": "In your view, what explains the difference between the dream company and the company as it is now?",
+    "q_dream": "In four words: how would you like the company to be? (for example: top three in the market, innovative, stable…)",
+    "q_bench": "Which companies (from other industries and countries) come closest, in image, feel or emotion, to your idea of a dream company, and why?",
     "s1_label": "Block 2",
-    "s1_title": "Colleagues and working conditions",
-    "q_colleague": "Four qualities your ideal colleagues should have:",
-    "q_conditions": "Three conditions you need in order to work at full capacity:",
+    "s1_title": "Colleagues and conditions",
+    "q_colleague": "Four qualities you value in colleagues and in your relationships with them",
+    "q_conditions": "Three conditions under which your work would be most effective, in order of priority (the first is the most important)",
+    "lbl_first": "1 — the most important",
     "s2_label": "Block 3",
-    "s2_title": "Management style",
-    "q_mgmt": "Three characteristics of the ideal management style for you personally:",
-    "q_leader": "If you were a leader — four qualities you would like to develop in yourself:",
+    "s2_title": "Management and leadership",
+    "q_mgmt_form": "Which form of people management would be most effective? (for example: constant control, full autonomy, regular feedback…)",
+    "q_leader_valued": "You as a manager: which of your personal qualities should your team value first and foremost?",
+    "hint_leader_valued": "If you have no direct reports, skip this question.",
+    "q_ceo": "Three important roles of the company's chief executive",
+    "q_ceo_quality": "Three valuable personal qualities of the company's chief executive",
     "s3_label": "Block 4",
-    "s3_title": "Roles and decision-making",
-    "q_ceo": "Three roles your company’s CEO should fulfil first and foremost:",
-    "q_now": "Four words or expressions that describe your current company:",
-    "q_decisions": "Three recent decisions made in your company that pleased you:",
+    "s3_title": "The company now",
+    "q_now": "In 3–4 words: what is the company like now?",
+    "q_dream_obstacle": "In your view, what explains the difference between the dream company and the company as it is now?",
+    "q_decisions_needed": "Three decisions that need to be made for the company to become the company of your dreams",
     "s4_label": "Block 5",
     "s4_title": "Changes and expectations",
-    "q_changes": "Five changes you would like to see in your company:",
-    "q_agency_change": "Which of these five changes could you start within your own area of responsibility in the coming month, and what would you begin with?",
-    "q_expect_sub": "Four qualities you expect from your subordinates or team members:",
+    "q_changes": "What should change in the company first? (up to five points)",
+    "q_agency_change": "Which of these changes could you start within your own area of responsibility in the coming month, and what would you begin with?",
+    "q_expect_sub": "What do you expect from your subordinates or team members? (four qualities)",
     "consent": "I consent to the processing of my answers for research purposes by Association de l'Intelligence Narrative® in accordance with GDPR. See the Privacy Policy for details. I know that I can withdraw my consent and request deletion.",
     "thanks_title": "Thank you",
     "thanks_text": "Your answers about the organisation have been received. They will help make our work together truly precise.<br><br>See you soon.",
@@ -445,27 +458,11 @@ async function submitForm() {
     alert(T().consent_alert);
     return;
   }
-  const answers = {
-    dream_word_1: getVal('dream_word_1'), dream_word_2: getVal('dream_word_2'),
-    dream_word_3: getVal('dream_word_3'), dream_word_4: getVal('dream_word_4'),
-    benchmark_1: getVal('benchmark_1'), benchmark_2: getVal('benchmark_2'), benchmark_3: getVal('benchmark_3'),
-    dream_obstacle: getVal('dream_obstacle'),
-    colleague_q_1: getVal('colleague_q_1'), colleague_q_2: getVal('colleague_q_2'),
-    colleague_q_3: getVal('colleague_q_3'), colleague_q_4: getVal('colleague_q_4'),
-    condition_1: getVal('condition_1'), condition_2: getVal('condition_2'), condition_3: getVal('condition_3'),
-    mgmt_style_1: getVal('mgmt_style_1'), mgmt_style_2: getVal('mgmt_style_2'), mgmt_style_3: getVal('mgmt_style_3'),
-    leader_q_1: getVal('leader_q_1'), leader_q_2: getVal('leader_q_2'),
-    leader_q_3: getVal('leader_q_3'), leader_q_4: getVal('leader_q_4'),
-    ceo_role_1: getVal('ceo_role_1'), ceo_role_2: getVal('ceo_role_2'), ceo_role_3: getVal('ceo_role_3'),
-    now_word_1: getVal('now_word_1'), now_word_2: getVal('now_word_2'),
-    now_word_3: getVal('now_word_3'), now_word_4: getVal('now_word_4'),
-    decision_1: getVal('decision_1'), decision_2: getVal('decision_2'), decision_3: getVal('decision_3'),
-    change_1: getVal('change_1'), change_2: getVal('change_2'), change_3: getVal('change_3'),
-    change_4: getVal('change_4'), change_5: getVal('change_5'),
-    agency_change: getVal('agency_change'),
-    expect_sub_1: getVal('expect_sub_1'), expect_sub_2: getVal('expect_sub_2'),
-    expect_sub_3: getVal('expect_sub_3'), expect_sub_4: getVal('expect_sub_4')
-  };
+  // Все поля формы по id: ключи ответа = id полей. Метку версии сервер
+  // проверяет сам (stampFormVersion), форма лишь сообщает, что она гибридная.
+  const answers = { form_version: FORM_VERSION };
+  document.querySelectorAll('#screen-form input[type=text], #screen-form textarea').forEach(el => { answers[el.id] = getVal(el.id); });
+
 
   document.getElementById('btn-next').disabled = true;
   document.getElementById('btn-next').textContent = T().btn_sending;
